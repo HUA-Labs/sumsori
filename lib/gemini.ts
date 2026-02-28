@@ -15,8 +15,8 @@ export function getGenAI(): GoogleGenAI {
 /** Analysis model — fast, supports audio input */
 export const ANALYSIS_MODEL = 'gemini-2.5-flash';
 
-/** Image generation model — Nano Banana 2 (faster + 4K + better text rendering) */
-export const IMAGE_MODEL = 'gemini-3.1-flash-image-preview';
+/** Image generation model — Gemini 2.0 Flash (native image gen) */
+export const IMAGE_MODEL = 'gemini-2.0-flash-exp';
 
 /** TTS model — Gemini TTS preview */
 export const TTS_MODEL = 'gemini-2.5-flash-preview-tts';
