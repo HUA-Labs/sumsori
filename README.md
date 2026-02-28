@@ -246,20 +246,20 @@ CREATE TABLE cards (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id TEXT,
   nickname TEXT,
-  input_mode TEXT DEFAULT 'voice',
-  voice_tone JSONB,
-  text_content JSONB,
-  surface_emotion JSONB,
-  hidden_emotion JSONB,
-  concordance JSONB,
-  core_emotion TEXT,
-  summary TEXT,
-  image_url TEXT,
-  audio_url TEXT,
+  voice_tone JSONB NOT NULL,
+  text_content JSONB NOT NULL,
+  concordance JSONB NOT NULL,
+  core_emotion TEXT NOT NULL,
+  summary TEXT NOT NULL,
+  image_url TEXT NOT NULL,
   image_prompt JSONB,
   personal_message TEXT,
-  show_transcript BOOLEAN DEFAULT false,
-  created_at TIMESTAMPTZ DEFAULT now()
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  audio_url TEXT,
+  input_mode TEXT DEFAULT 'voice',
+  surface_emotion JSONB,
+  hidden_emotion JSONB,
+  show_transcript BOOLEAN DEFAULT false
 );
 
 -- Enable Row Level Security
