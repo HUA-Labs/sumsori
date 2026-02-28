@@ -336,13 +336,24 @@ Sumsori is not a clinical emotion analyzer. It's a **communication bridge**.
 
 The app exists for moments when words aren't enough — when you want to tell someone how you feel but can't find the right way to say it. Sumsori listens to the gap between what you say and what you mean, then translates that gap into something visual and shareable.
 
-The illustrations use a **small white cat** seen from behind, because:
+The illustrations use a **small white cat** seen from behind or in three-quarter back view (a hint of one eye is OK, but never fully front-facing), because:
 - It's universal — not tied to any specific person or identity
-- The back view invites projection — the viewer fills in the emotion
+- The back/side view invites projection — the viewer fills in the emotion
 - Oil pastel style feels handmade, warm, and personal
 - The cat is always alone in a scene, mirroring the solitude of unexpressed feelings
 
 The accessibility-first text mode ensures that **everyone** — including deaf and hard-of-hearing users — can use this communication tool. The TTS output gives written words an emotional voice they wouldn't otherwise have.
+
+---
+
+## Prior Work / Open Source
+
+Sumsori is built on top of **HUA Framework**, an open-source UI and i18n toolkit developed by HUA Labs prior to this hackathon:
+
+- [`@hua-labs/hua`](https://www.npmjs.com/package/@hua-labs/hua) — i18n provider, theme system, and shared utilities
+- [`@hua-labs/ui`](https://www.npmjs.com/package/@hua-labs/ui) — component library (Avatar, Popover, overlays, etc.)
+
+These packages are pre-existing open-source libraries and were **not** built for this hackathon. Everything else — the Gemini integration, analysis prompts, voice/text pipelines, image generation, TTS, demo system, and the Sumsori application itself — was built during the hackathon.
 
 ---
 
