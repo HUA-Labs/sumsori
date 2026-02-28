@@ -52,7 +52,7 @@
   },
   "nav": {
     "record": "Record",
-    "text": "Text",
+    "text": "Deliver",
     "myCards": "My Cards",
     "profile": "Profile"
   },
@@ -62,20 +62,20 @@
     "logout": "Log out"
   },
   "textMode": {
-    "title": "Express your heart in words",
+    "title": "Say what you can't — we'll deliver it",
     "placeholder": "Write what you want to say...",
     "voiceSelect": "Choose a voice",
     "voiceFemaleWarm": "Female · Warm",
     "voiceFemaleFirm": "Female · Firm",
     "voiceMaleUpbeat": "Male · Upbeat",
     "voiceMaleCalm": "Male · Calm",
-    "analyze": "Read My Heart",
+    "analyze": "Deliver My Heart",
     "surfaceEmotion": "What you said out loud",
     "hiddenEmotion": "What's really inside",
     "playVoice": "Listen as voice",
     "writeAgain": "Write Again",
-    "analyzingStep1": "Reading your words",
-    "analyzingStep2": "Finding the hidden feelings",
+    "analyzingStep1": "Reading what you want to say",
+    "analyzingStep2": "Finding the real feeling",
     "analyzingStep3": "Painting your picture",
     "analyzingStep4": "Almost there!"
   },
