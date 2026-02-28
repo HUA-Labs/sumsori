@@ -13,6 +13,18 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN pnpm build
 
+# Flatten standalone output (Next.js 16 may nest under package name)
+RUN if [ -f .next/standalone/server.js ]; then \
+      echo "Standalone at root"; \
+    elif [ -f .next/standalone/sumsori/server.js ]; then \
+      echo "Standalone nested under sumsori"; \
+      cp -r .next/standalone/sumsori/* .next/standalone/; \
+    else \
+      echo "Cannot find server.js in standalone output" && \
+      find .next/standalone -name server.js && \
+      exit 1; \
+    fi
+
 # ── Stage 3: Production runner ──
 FROM node:22-alpine AS runner
 WORKDIR /app
@@ -22,11 +34,15 @@ ENV PORT=8080
 RUN addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 nextjs
 
-# Copy standalone output (Next.js 16 nests under package name)
-COPY --from=builder /app/.next/standalone/sumsori ./
+# Copy standalone output
+COPY --from=builder /app/.next/standalone/server.js ./server.js
+COPY --from=builder /app/.next/standalone/node_modules ./node_modules
 COPY --from=builder /app/.next/standalone/package.json ./package.json
 COPY --from=builder /app/.next/static ./.next/static
 COPY --from=builder /app/public ./public
+
+# Copy translations (needed at runtime)
+COPY --from=builder /app/translations ./translations
 
 USER nextjs
 
