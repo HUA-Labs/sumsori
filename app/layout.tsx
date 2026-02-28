@@ -2,10 +2,11 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { HuaProvider } from "@hua-labs/hua/framework";
 import { getSSRTranslations } from "@hua-labs/hua/framework/server";
-import { ThemeToggle } from "@hua-labs/hua/ui";
 import config from "../hua.config";
 import { Providers } from "./providers";
 import { SWRegister } from "./sw-register";
+import Header from "@/components/Header";
+import BottomNav from "@/components/BottomNav";
 
 export const metadata: Metadata = {
   title: "숨소리 — 말하지 못한 마음을 그림으로",
@@ -61,10 +62,11 @@ export default async function RootLayout({
         <HuaProvider config={configWithSSR}>
           <Providers>
             <SWRegister />
-            <div className="fixed top-4 right-4 z-50">
-              <ThemeToggle variant="icon" />
+            <Header />
+            <div className="pt-14 pb-20">
+              {children}
             </div>
-            {children}
+            <BottomNav />
           </Providers>
         </HuaProvider>
       </body>

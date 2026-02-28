@@ -3,6 +3,7 @@
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import LoginSheet from '@/components/LoginSheet';
 
 interface CardItem {
   id: string;
@@ -15,6 +16,7 @@ export default function MyPage() {
   const { data: session, status } = useSession();
   const [cards, setCards] = useState<CardItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [loginOpen, setLoginOpen] = useState(false);
 
   useEffect(() => {
     if (status !== 'authenticated') return;
@@ -25,9 +27,16 @@ export default function MyPage() {
       .finally(() => setLoading(false));
   }, [status]);
 
+  // 비로그인 시 자동으로 LoginSheet 열기
+  useEffect(() => {
+    if (status === 'unauthenticated') {
+      setLoginOpen(true);
+    }
+  }, [status]);
+
   if (status === 'loading') {
     return (
-      <main className="min-h-dvh flex items-center justify-center">
+      <main className="flex items-center justify-center py-20">
         <div className="w-8 h-8 rounded-full border-2 border-[var(--color-border)] border-t-[var(--color-accent)] spin-slow" />
       </main>
     );
@@ -35,35 +44,28 @@ export default function MyPage() {
 
   if (status === 'unauthenticated') {
     return (
-      <main className="min-h-dvh flex flex-col items-center justify-center px-4 gap-4">
+      <main className="flex flex-col items-center justify-center px-4 py-20 gap-4">
         <p className="text-[var(--color-muted-foreground)]">로그인이 필요합니다</p>
-        <Link
-          href="/"
-          className="py-3 px-6 rounded-2xl bg-[var(--color-accent)] text-white text-sm font-medium"
+        <button
+          onClick={() => setLoginOpen(true)}
+          className="py-3 px-6 rounded-2xl bg-[var(--color-accent)] text-white text-sm font-medium transition-transform active:scale-95"
         >
-          홈으로
-        </Link>
+          로그인하기
+        </button>
+        <LoginSheet isOpen={loginOpen} onClose={() => setLoginOpen(false)} />
       </main>
     );
   }
 
   return (
-    <main className="min-h-dvh px-4 py-8">
+    <main className="px-4 py-6">
       <div className="max-w-lg mx-auto space-y-6">
-        {/* Header */}
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-2xl font-bold">내 숨소리</h1>
-            <p className="text-sm text-[var(--color-muted-foreground)]">
-              {session?.user?.name}님의 감정 기록
-            </p>
-          </div>
-          <Link
-            href="/"
-            className="py-2 px-4 rounded-xl glass text-sm text-[var(--color-foreground)]"
-          >
-            녹음하기
-          </Link>
+        {/* Page title */}
+        <div>
+          <h1 className="text-2xl font-bold">내 숨소리</h1>
+          <p className="text-sm text-[var(--color-muted-foreground)]">
+            {session?.user?.name}님의 감정 기록
+          </p>
         </div>
 
         {/* Cards grid */}
