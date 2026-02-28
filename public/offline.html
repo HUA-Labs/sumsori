@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>숨소리 — 오프라인</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Pretendard Variable', sans-serif;
+      background: #0a0a0a;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100dvh;
+      padding: 2rem;
+    }
+    .container { text-align: center; max-width: 320px; }
+    .icon { font-size: 3rem; margin-bottom: 1.5rem; opacity: 0.6; }
+    h1 { font-size: 1.25rem; font-weight: 500; margin-bottom: 0.75rem; }
+    p { font-size: 0.875rem; color: rgba(255,255,255,0.5); line-height: 1.6; }
+    button {
+      margin-top: 2rem;
+      padding: 0.75rem 2rem;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 9999px;
+      background: transparent;
+      color: #fff;
+      font-size: 0.875rem;
+      cursor: pointer;
+    }
+    button:active { background: rgba(255,255,255,0.1); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="icon">&#9729;</div>
+    <h1>인터넷 연결이 필요해요</h1>
+    <p>숨소리는 음성 분석을 위해 인터넷 연결이 필요합니다. 연결 후 다시 시도해 주세요.</p>
+    <button onclick="location.reload()">다시 시도</button>
+  </div>
+</body>
+</html>
