@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useEffect, useRef } from 'react';
+import { useState, useCallback, useEffect, useRef, useMemo } from 'react';
 import { useTranslation } from '@hua-labs/hua/i18n';
 import { useAudioRecorder } from '@/hooks/useAudioRecorder';
 import type { AnalyzeResponse } from '@/lib/types';
@@ -19,6 +19,7 @@ export default function HomePage() {
   const [personalMessage, setPersonalMessage] = useState('');
   const [messageSaved, setMessageSaved] = useState(false);
   const [shared, setShared] = useState(false);
+  const [includeTranscript, setIncludeTranscript] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Auto-submit when recording stops
@@ -97,19 +98,40 @@ export default function HomePage() {
   }, []);
 
   const handleSaveMessage = useCallback(async () => {
-    if (!result?.cardId || result.cardId === 'demo' || !personalMessage.trim()) return;
+    if (!result?.cardId || result.cardId === 'demo') return;
     try {
       await fetch('/api/card/message', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ cardId: result.cardId, message: personalMessage.trim() }),
+        body: JSON.stringify({
+          cardId: result.cardId,
+          message: personalMessage.trim() || undefined,
+          showTranscript: includeTranscript,
+        }),
       });
       setMessageSaved(true);
     } catch { /* ignore */ }
-  }, [result, personalMessage]);
+  }, [result, personalMessage, includeTranscript]);
 
   const handleShare = useCallback(async () => {
     if (!result?.cardId || result.cardId === 'demo') return;
+
+    // Save message + transcript preference before sharing
+    if (!messageSaved) {
+      try {
+        await fetch('/api/card/message', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            cardId: result.cardId,
+            message: personalMessage.trim() || undefined,
+            showTranscript: includeTranscript,
+          }),
+        });
+        setMessageSaved(true);
+      } catch { /* ignore */ }
+    }
+
     const url = `${window.location.origin}/card/${result.cardId}`;
     try {
       if (navigator.share) {
@@ -123,7 +145,7 @@ export default function HomePage() {
       }
       setShared(true);
     } catch { /* cancelled */ }
-  }, [result]);
+  }, [result, personalMessage, includeTranscript, messageSaved]);
 
   const handleReset = useCallback(() => {
     setAppState('LANDING');
@@ -132,6 +154,7 @@ export default function HomePage() {
     setPersonalMessage('');
     setMessageSaved(false);
     setShared(false);
+    setIncludeTranscript(false);
   }, []);
 
   const formatTime = (sec: number) => {
@@ -235,31 +258,8 @@ export default function HomePage() {
         </div>
       )}
 
-      {/* ── ANALYZING ── */}
-      {appState === 'ANALYZING' && (
-        <div className="w-full max-w-md text-center space-y-8 fade-in">
-          {/* Spinner */}
-          <div className="flex items-center justify-center">
-            <div className="w-16 h-16 rounded-full border-4 border-[var(--color-border)] border-t-[var(--color-accent)] spin-slow" />
-          </div>
-
-          <div className="space-y-2">
-            <p className="font-batang text-lg">
-              {t('common:analyzing.listening')}
-            </p>
-            <p className="text-sm text-[var(--color-muted-foreground)]">
-              {t('common:analyzing.processing')}
-            </p>
-          </div>
-
-          {/* Shimmer skeleton */}
-          <div className="space-y-3">
-            <div className="h-4 rounded-full shimmer w-3/4 mx-auto" />
-            <div className="h-4 rounded-full shimmer w-1/2 mx-auto" />
-            <div className="h-4 rounded-full shimmer w-2/3 mx-auto" />
-          </div>
-        </div>
-      )}
+      {/* ── ANALYZING — Full-screen loading overlay ── */}
+      {appState === 'ANALYZING' && <AnalyzingOverlay t={t} />}
 
       {/* ── RESULT ── */}
       {appState === 'RESULT' && result && (
@@ -338,6 +338,22 @@ export default function HomePage() {
             </div>
           )}
 
+          {/* Include transcript toggle */}
+          {result.cardId !== 'demo' && result.textContent.transcript && (
+            <label className="flex items-center gap-3 glass rounded-xl p-3 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={includeTranscript}
+                onChange={(e) => setIncludeTranscript(e.target.checked)}
+                className="w-4 h-4 rounded accent-[var(--color-accent)]"
+                disabled={messageSaved}
+              />
+              <span className="text-sm text-[var(--color-foreground)]">
+                {t('common:result.includeTranscript')}
+              </span>
+            </label>
+          )}
+
           {/* Share */}
           <div className="space-y-3 pt-2">
             {result.cardId !== 'demo' && (
@@ -359,5 +375,81 @@ export default function HomePage() {
         </div>
       )}
     </main>
+  );
+}
+
+/* ── Analyzing Overlay ── */
+
+const STEP_INTERVALS = [0, 5000, 12000, 20000]; // ms thresholds for each step
+
+function AnalyzingOverlay({ t }: { t: (key: string) => string }) {
+  const [step, setStep] = useState(0);
+  const [dots, setDots] = useState('');
+
+  // Progress through steps based on elapsed time
+  useEffect(() => {
+    const timers = STEP_INTERVALS.slice(1).map((ms, i) =>
+      setTimeout(() => setStep(i + 1), ms)
+    );
+    return () => timers.forEach(clearTimeout);
+  }, []);
+
+  // Animated dots
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDots(prev => prev.length >= 3 ? '' : prev + '.');
+    }, 500);
+    return () => clearInterval(interval);
+  }, []);
+
+  const stepKeys = [
+    'common:analyzing.step1',
+    'common:analyzing.step2',
+    'common:analyzing.step3',
+    'common:analyzing.step4',
+  ];
+
+  const emojis = ['👂', '💭', '🎨', '✨'];
+
+  return (
+    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[var(--color-background)]/95 backdrop-blur-sm px-6">
+      <div className="w-full max-w-xs text-center space-y-8 fade-in">
+        {/* Breathing emoji */}
+        <div className="breathe text-5xl" key={step}>
+          {emojis[step]}
+        </div>
+
+        {/* Step message */}
+        <div className="space-y-2">
+          <p className="font-batang text-xl float-up" key={`msg-${step}`}>
+            {t(stepKeys[step])}{dots}
+          </p>
+          <p className="text-sm text-[var(--color-muted-foreground)]">
+            {t('common:analyzing.processing')}
+          </p>
+        </div>
+
+        {/* Step dots indicator */}
+        <div className="flex items-center justify-center gap-2">
+          {stepKeys.map((_, i) => (
+            <div
+              key={i}
+              className={`rounded-full transition-all duration-500 ${
+                i <= step
+                  ? 'w-2.5 h-2.5 bg-[var(--color-accent)]'
+                  : 'w-2 h-2 bg-[var(--color-border)]'
+              }`}
+            />
+          ))}
+        </div>
+
+        {/* Shimmer skeleton — looks like incoming result */}
+        <div className="space-y-3 pt-4">
+          <div className="aspect-[4/3] rounded-2xl shimmer mx-auto" />
+          <div className="h-4 rounded-full shimmer w-1/3 mx-auto" />
+          <div className="h-3 rounded-full shimmer w-2/3 mx-auto" />
+        </div>
+      </div>
+    </div>
   );
 }

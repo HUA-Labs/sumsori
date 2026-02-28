@@ -3,7 +3,8 @@
     "name": "숨소리",
     "tagline": "말하지 못한 마음을 그림으로",
     "description": "1분만 말하면, 목소리가 그림이 됩니다.\n말로 전하지 못한 마음을 그림으로 보내세요.",
-    "footer": "숨소리 — 말하지 못한 마음을 그림으로"
+    "footer": "숨소리 — 말하지 못한 마음을 그림으로",
+    "voiceBecamePicture": "목소리가 그림이 되었어요."
   },
   "landing": {
     "startRecording": "녹음 시작하기",
@@ -11,13 +12,17 @@
     "tryDemo": "데모로 체험하기"
   },
   "recording": {
-    "prompt": "지금 느끼는 감정을 말해보세요",
+    "prompt": "지금 하고 싶은 말을 해보세요",
     "ending": "곧 종료됩니다...",
     "tapToStop": "탭하여 녹음 중지"
   },
   "analyzing": {
     "listening": "당신의 목소리를 듣고 있어요...",
-    "processing": "감정을 읽고 그림을 그리는 중입니다"
+    "processing": "마음을 읽고 그림을 그리는 중이에요",
+    "step1": "목소리를 듣고 있어요",
+    "step2": "마음을 읽는 중이에요",
+    "step3": "그림을 그리고 있어요",
+    "step4": "거의 다 됐어요!"
   },
   "result": {
     "voiceTone": "목소리",
@@ -27,17 +32,18 @@
     "concordanceMedium": "보통",
     "concordanceLow": "낮음",
     "showTranscript": "음성 텍스트 보기",
+    "includeTranscript": "녹음 텍스트 공유에 포함",
     "messagePlaceholder": "받는 사람에게 한마디 (선택)",
     "saveMessage": "메시지 저장",
     "saved": "저장됨",
-    "share": "공유하기",
-    "shared": "공유 완료!",
-    "shareText": "목소리가 그림이 되었어요.",
+    "share": "마음 전하기",
+    "shared": "전달 완료!",
+    "shareText": "하지 못한 말을 전해드려요.",
     "recordAgain": "다시 녹음하기"
   },
   "my": {
     "title": "내 숨소리",
-    "subtitle": "{{name}}님의 감정 기록",
+    "subtitle": "{{name}}님의 마음 기록",
     "empty": "아직 숨소리가 없어요",
     "firstRecording": "첫 녹음 시작하기",
     "loginRequired": "로그인이 필요합니다",
@@ -50,18 +56,19 @@
   },
   "auth": {
     "loginWithKakao": "카카오로 시작하기",
+    "loginDescription": "로그인하면 나의 마음 기록을\n저장하고 모아볼 수 있어요.",
     "logout": "로그아웃"
   },
   "error": {
     "micPermission": "마이크 권한을 허용해주세요.",
     "fileTooLarge": "파일 크기는 10MB 이하만 가능해요.",
-    "demoFailed": "데모 로드 실패",
-    "analysisFailed": "분석 실패",
-    "serverError": "서버 연결 실패"
+    "demoFailed": "불러오지 못했어요",
+    "analysisFailed": "전달하지 못했어요",
+    "serverError": "연결이 안 돼요"
   },
   "offline": {
     "title": "인터넷 연결이 필요해요",
-    "description": "숨소리는 음성 분석을 위해 인터넷 연결이 필요합니다.",
+    "description": "숨소리는 마음을 전하기 위해 인터넷 연결이 필요합니다.",
     "retry": "다시 시도"
   }
 }

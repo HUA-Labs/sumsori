@@ -10,16 +10,17 @@ import { auth } from '@/lib/auth';
 export const maxDuration = 60; // Vercel function timeout
 
 export async function POST(req: NextRequest) {
+  let locale = 'ko';
   try {
     // 1. Receive audio blob
     const formData = await req.formData();
     const audioFile = formData.get('audio') as File | null;
     const isDemo = formData.get('demo') === 'true';
-    const locale = formData.get('locale')?.toString() || 'ko';
+    locale = formData.get('locale')?.toString() || 'ko';
 
     // Demo mode — return cached result
     if (isDemo || !audioFile) {
-      const demo = getRandomDemo();
+      const demo = getRandomDemo(locale);
       return NextResponse.json<AnalyzeResponse>({
         success: true,
         data: {
@@ -169,7 +170,7 @@ export async function POST(req: NextRequest) {
     console.error('[/api/analyze] Error:', error);
 
     // Fallback to demo on any error
-    const demo = getRandomDemo();
+    const demo = getRandomDemo(locale);
     return NextResponse.json<AnalyzeResponse>(
       {
         success: false,

@@ -187,7 +187,83 @@ export const DEMO_BUNDLES: DemoBundle[] = [
   }
 ];
 
-/** Get a random demo bundle */
-export function getRandomDemo(): DemoBundle {
-  return DEMO_BUNDLES[Math.floor(Math.random() * DEMO_BUNDLES.length)]!;
+export const DEMO_BUNDLES_EN: DemoBundle[] = [
+  {
+    analysis: {
+      "voiceTone": {
+        "emotion": "strained",
+        "energy": 70,
+        "pace": "normal",
+        "stability": 60,
+        "details": "The voice is slightly higher pitched with an almost forced cheerfulness and an underlying tension, particularly when emphasizing 'great'. There's a defensive quality in the delivery, lacking genuine relaxation."
+      },
+      "textContent": {
+        "emotion": "asserted self-sufficiency",
+        "themes": ["independence", "routine", "denial of need"],
+        "keywords": ["fine", "honestly", "needs", "come home to", "coffee", "playlist", "routines", "great"],
+        "sentiment": 0.8,
+        "transcript": "Oh, it's totally fine. Honestly. I mean, who needs someone to come home to, right? I've got my coffee and my playlist and my little routines. It's great actually. I'm doing really great. Yeah, really great."
+      },
+      "concordance": {
+        "match": "low",
+        "explanation": "The explicitly positive and self-sufficient words are contradicted by a voice tone that sounds tense, forced, and subtly defensive, indicating a deeper emotional state than what is being expressed."
+      },
+      "coreEmotion": "yearning",
+      "summary": "A forced cheerfulness attempts to mask a deep, unacknowledged longing for connection, betrayed by the subtle tension in the voice.",
+      "imagePrompt": {
+        "format": "SQUARE 1:1, fills entire canvas edge to edge, NO margins/borders/vignette",
+        "character": "one small, round, simple white cat",
+        "angle": "THREE-QUARTER BACK VIEW only (hint of one eye OK, never fully front-facing)",
+        "style": "oil pastel and crayon on thick textured paper. Visible rough strokes and paper grain. NO black outlines — shapes defined by color contrast only. Edges soft and rough like real crayon. Simple, minimal, children's picture book. NOT photorealistic, NOT 3D, NOT anime, NOT smooth digital",
+        "scene": "train platform alone",
+        "catPose": "sitting still looking away",
+        "colorPalette": "warm peach/amber/gold",
+        "lighting": "single streetlamp glow",
+        "forbidden": "NO text, NO words, NO letters, NO human faces, NO other animals"
+      }
+    },
+    imageUrl: '/demo/sample-en-01.png',
+  },
+  {
+    analysis: {
+      "voiceTone": {
+        "emotion": "subdued",
+        "energy": 30,
+        "pace": "slow",
+        "stability": 85,
+        "details": "The voice maintains a low-to-mid pitch range with minimal inflection, creating a somewhat flat and monotonous delivery. Pauses are natural, but the overall slow pace and lack of vocal energy contribute to a weary, detached feel."
+      },
+      "textContent": {
+        "emotion": "disappointment",
+        "themes": ["unrequited effort", "personal loss", "acceptance of reality", "betrayal"],
+        "keywords": ["everything you have", "not enough", "walk away", "mattered", "that's life"],
+        "sentiment": -0.8,
+        "transcript": "I just think it's interesting, you know, how you can give everything you have to someone, every single day for years, and they just, decide it wasn't enough. They just walk away like none of it mattered. But hey, that's life I guess."
+      },
+      "concordance": {
+        "match": "high",
+        "explanation": "The subdued and weary voice tone perfectly aligns with the text's narrative of giving profoundly and experiencing unappreciated loss, concluding with a resigned acceptance."
+      },
+      "coreEmotion": "resignation",
+      "summary": "A quiet voice recounts the bittersweet pain of unacknowledged effort and ultimately accepts the harsh simplicity of life's unpredictable turns.",
+      "imagePrompt": {
+        "format": "SQUARE 1:1, fills entire canvas edge to edge, NO margins/borders/vignette",
+        "character": "one small, round, simple white cat (NOT human-like, NOT realistic cat)",
+        "angle": "THREE-QUARTER BACK VIEW only (hint of one eye OK, never fully front-facing)",
+        "style": "oil pastel and crayon on thick textured paper. Visible rough strokes and paper grain. NO black outlines — shapes defined by color contrast only. Edges soft and rough like real crayon. Simple, minimal, children's picture book. NOT photorealistic, NOT 3D, NOT anime, NOT smooth digital",
+        "scene": "bridge over quiet river",
+        "catPose": "lying flat",
+        "colorPalette": "muted grays/beige",
+        "lighting": "diffused overcast",
+        "forbidden": "NO text, NO words, NO letters, NO human faces, NO other animals"
+      }
+    },
+    imageUrl: '/demo/sample-en-02.png',
+  },
+];
+
+/** Get a random demo bundle, optionally filtered by locale */
+export function getRandomDemo(locale?: string): DemoBundle {
+  const bundles = locale === 'en' ? DEMO_BUNDLES_EN : DEMO_BUNDLES;
+  return bundles[Math.floor(Math.random() * bundles.length)]!;
 }

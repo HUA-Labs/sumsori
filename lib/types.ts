@@ -124,6 +124,8 @@ export interface SharedCard {
   image_url: string;
   core_emotion: string;
   personal_message: string | null;
+  show_transcript: boolean | null;
+  text_content: TextContent | null;
   created_at: string;
 }
 

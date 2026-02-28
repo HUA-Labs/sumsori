@@ -2,23 +2,24 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useTranslation } from '@hua-labs/hua/i18n';
 import { Microphone, Images } from '@phosphor-icons/react';
 
 const tabs = [
-  { href: '/', label: '녹음', icon: Microphone },
-  { href: '/my', label: '내 숨소리', icon: Images },
+  { href: '/', labelKey: 'common:nav.record', icon: Microphone },
+  { href: '/my', labelKey: 'common:nav.myCards', icon: Images },
 ] as const;
 
 export default function BottomNav() {
   const pathname = usePathname();
+  const { t } = useTranslation();
 
-  // /card/[id] 공유 페이지에서는 숨기기
   if (pathname.startsWith('/card/')) return null;
 
   return (
     <nav className="fixed bottom-0 inset-x-0 z-40 glass border-t border-[var(--color-border)]/40 pb-[env(safe-area-inset-bottom)]">
       <div className="flex h-16">
-        {tabs.map(({ href, label, icon: Icon }) => {
+        {tabs.map(({ href, labelKey, icon: Icon }) => {
           const active = href === '/' ? pathname === '/' : pathname.startsWith(href);
           return (
             <Link
@@ -31,7 +32,7 @@ export default function BottomNav() {
               }`}
             >
               <Icon size={24} weight={active ? 'fill' : 'regular'} />
-              {label}
+              {t(labelKey)}
             </Link>
           );
         })}

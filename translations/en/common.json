@@ -3,7 +3,8 @@
     "name": "Sumsori",
     "tagline": "Turn unspoken feelings into pictures",
     "description": "Speak for one minute, and your voice becomes a picture.\nSend the feelings you couldn't put into words.",
-    "footer": "Sumsori — Turn unspoken feelings into pictures"
+    "footer": "Sumsori — Turn unspoken feelings into pictures",
+    "voiceBecamePicture": "A voice became a picture."
   },
   "landing": {
     "startRecording": "Start Recording",
@@ -11,13 +12,17 @@
     "tryDemo": "Try Demo"
   },
   "recording": {
-    "prompt": "Say what you feel right now",
+    "prompt": "Say what's on your mind",
     "ending": "Ending soon...",
     "tapToStop": "Tap to stop recording"
   },
   "analyzing": {
     "listening": "Listening to your voice...",
-    "processing": "Reading emotions and painting your picture"
+    "processing": "Reading your heart and painting a picture",
+    "step1": "Listening to your voice",
+    "step2": "Reading between the lines",
+    "step3": "Painting your picture",
+    "step4": "Almost there!"
   },
   "result": {
     "voiceTone": "Voice",
@@ -27,17 +32,18 @@
     "concordanceMedium": "Medium",
     "concordanceLow": "Low",
     "showTranscript": "Show transcript",
+    "includeTranscript": "Include transcript in share",
     "messagePlaceholder": "Add a message for the recipient (optional)",
     "saveMessage": "Save Message",
     "saved": "Saved",
-    "share": "Share",
-    "shared": "Shared!",
-    "shareText": "A voice became a picture.",
+    "share": "Send your heart",
+    "shared": "Sent!",
+    "shareText": "Words I couldn't say, sent as a picture.",
     "recordAgain": "Record Again"
   },
   "my": {
     "title": "My Sumsori",
-    "subtitle": "{{name}}'s emotion journal",
+    "subtitle": "{{name}}'s heart journal",
     "empty": "No recordings yet",
     "firstRecording": "Start your first recording",
     "loginRequired": "Login required",
@@ -50,18 +56,19 @@
   },
   "auth": {
     "loginWithKakao": "Continue with Kakao",
+    "loginDescription": "Sign in to save and look back on\nyour heart's moments.",
     "logout": "Log out"
   },
   "error": {
     "micPermission": "Please allow microphone access.",
     "fileTooLarge": "File size must be under 10MB.",
-    "demoFailed": "Failed to load demo",
-    "analysisFailed": "Analysis failed",
-    "serverError": "Server connection failed"
+    "demoFailed": "Couldn't load that",
+    "analysisFailed": "Couldn't deliver that",
+    "serverError": "Can't connect right now"
   },
   "offline": {
     "title": "Internet connection required",
-    "description": "Sumsori needs an internet connection for voice analysis.",
+    "description": "Sumsori needs an internet connection to deliver your heart.",
     "retry": "Try again"
   }
 }
