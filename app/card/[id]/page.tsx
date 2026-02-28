@@ -11,12 +11,28 @@ interface PageProps {
 async function getCard(id: string): Promise<SharedCard | null> {
   const { data, error } = await supabase
     .from('cards')
-    .select('id, image_url, core_emotion, personal_message, show_transcript, text_content, created_at')
+    .select('id, image_url, core_emotion, personal_message, show_transcript, text_content, voice_tone, surface_emotion, created_at')
     .eq('id', id)
     .single();
 
   if (error || !data) return null;
-  return data as SharedCard;
+
+  // Extract surface emotion label from voice_tone (voice mode) or surface_emotion (text mode)
+  const surfaceLabel =
+    (data.surface_emotion as { emotion?: string } | null)?.emotion ??
+    (data.voice_tone as { emotion?: string } | null)?.emotion ??
+    null;
+
+  return {
+    id: data.id,
+    image_url: data.image_url,
+    core_emotion: data.core_emotion,
+    surface_label: surfaceLabel,
+    personal_message: data.personal_message,
+    show_transcript: data.show_transcript,
+    text_content: data.text_content,
+    created_at: data.created_at,
+  } as SharedCard;
 }
 
 async function getLocale(): Promise<string> {
@@ -95,8 +111,16 @@ export default async function CardPage({ params }: PageProps) {
           />
         </div>
 
-        {/* Core Emotion */}
-        <div className="text-center">
+        {/* Emotion Tags: surface → core */}
+        <div className="flex items-center justify-center gap-2">
+          {card.surface_label && card.surface_label !== card.core_emotion && (
+            <>
+              <span className="px-4 py-1.5 rounded-full text-sm bg-[var(--color-muted)] text-[var(--color-muted-foreground)]">
+                #{card.surface_label}
+              </span>
+              <span className="text-[var(--color-muted-foreground)] text-sm">→</span>
+            </>
+          )}
           <span className="emotion-tag">
             #{card.core_emotion}
           </span>

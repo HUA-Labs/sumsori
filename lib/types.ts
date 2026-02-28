@@ -186,6 +186,8 @@ export interface SharedCard {
   id: string;
   image_url: string;
   core_emotion: string;
+  /** Surface emotion label (from voice_tone or surface_emotion) */
+  surface_label: string | null;
   personal_message: string | null;
   show_transcript: boolean | null;
   text_content: TextContent | null;
