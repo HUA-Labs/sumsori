@@ -1,15 +1,14 @@
 'use client';
 
-import { useState, useCallback, useEffect } from 'react';
-import { useSession, signIn } from 'next-auth/react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { useAudioRecorder } from '@/hooks/useAudioRecorder';
 import type { AnalyzeResponse } from '@/lib/types';
-import Link from 'next/link';
+
+const ACCEPTED_AUDIO_TYPES = 'audio/webm,audio/mp4,audio/m4a,audio/mpeg,audio/mp3,audio/wav,audio/ogg,audio/aac,.webm,.m4a,.mp3,.wav,.ogg,.aac,.mp4';
 
 type AppState = 'LANDING' | 'RECORDING' | 'ANALYZING' | 'RESULT';
 
 export default function HomePage() {
-  const { data: session } = useSession();
   const recorder = useAudioRecorder();
 
   const [appState, setAppState] = useState<AppState>('LANDING');
@@ -18,6 +17,7 @@ export default function HomePage() {
   const [personalMessage, setPersonalMessage] = useState('');
   const [messageSaved, setMessageSaved] = useState(false);
   const [shared, setShared] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Auto-submit when recording stops
   useEffect(() => {
@@ -43,6 +43,19 @@ export default function HomePage() {
   const handleStop = useCallback(() => {
     recorder.stop();
   }, [recorder]);
+
+  const handleFileUpload = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    // 10MB 제한
+    if (file.size > 10 * 1024 * 1024) {
+      setError('파일 크기는 10MB 이하만 가능해요.');
+      return;
+    }
+    handleSubmit(file);
+    // input 초기화 (같은 파일 재선택 가능)
+    if (fileInputRef.current) fileInputRef.current.value = '';
+  }, []);
 
   const handleDemo = useCallback(async () => {
     setAppState('ANALYZING');
@@ -127,7 +140,7 @@ export default function HomePage() {
   };
 
   return (
-    <main className="min-h-dvh flex flex-col items-center justify-center px-4 py-8">
+    <main className="flex flex-col items-center justify-center px-4 py-8 min-h-[calc(100dvh-theme(spacing.14)-theme(spacing.20))]">
       {/* ── LANDING ── */}
       {appState === 'LANDING' && (
         <div className="w-full max-w-md text-center space-y-8 fade-in">
@@ -161,6 +174,20 @@ export default function HomePage() {
             </button>
 
             <button
+              onClick={() => fileInputRef.current?.click()}
+              className="w-full py-3 rounded-2xl glass text-[var(--color-foreground)] text-sm transition-transform active:scale-95"
+            >
+              음성 파일 업로드
+            </button>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept={ACCEPTED_AUDIO_TYPES}
+              onChange={handleFileUpload}
+              className="hidden"
+            />
+
+            <button
               onClick={handleDemo}
               className="w-full py-3 rounded-2xl glass text-[var(--color-foreground)] text-sm transition-transform active:scale-95"
             >
@@ -168,26 +195,6 @@ export default function HomePage() {
             </button>
           </div>
 
-          {/* Auth */}
-          <div className="pt-4 space-y-3">
-            {session?.user ? (
-              <div className="flex items-center justify-center gap-4 text-sm">
-                <span className="text-[var(--color-muted-foreground)]">
-                  {session.user.name}님
-                </span>
-                <Link href="/my" className="text-[var(--color-accent-foreground)] font-medium">
-                  내 숨소리
-                </Link>
-              </div>
-            ) : (
-              <button
-                onClick={() => signIn('kakao')}
-                className="w-full py-3 rounded-2xl bg-[#FEE500] text-[#191919] text-sm font-medium transition-transform active:scale-95"
-              >
-                카카오로 시작하기
-              </button>
-            )}
-          </div>
         </div>
       )}
 
