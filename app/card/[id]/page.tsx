@@ -87,7 +87,7 @@ export default async function CardPage({ params }: PageProps) {
     <main className="min-h-dvh flex flex-col items-center justify-center px-4 py-8">
       <div className="w-full max-w-md space-y-6">
         {/* Image */}
-        <div className="overflow-hidden rounded-2xl shadow-lg">
+        <div className="overflow-hidden rounded-2xl">
           <img
             src={card.image_url}
             alt={card.core_emotion}

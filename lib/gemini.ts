@@ -17,3 +17,6 @@ export const ANALYSIS_MODEL = 'gemini-2.5-flash';
 
 /** Image generation model — Nano Banana 2 (faster + 4K + better text rendering) */
 export const IMAGE_MODEL = 'gemini-3.1-flash-image-preview';
+
+/** TTS model — Gemini TTS preview */
+export const TTS_MODEL = 'gemini-2.5-flash-preview-tts';

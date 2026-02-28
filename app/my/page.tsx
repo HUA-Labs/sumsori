@@ -4,7 +4,7 @@ import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useTranslation } from '@hua-labs/hua/i18n';
-import LoginSheet from '@/components/LoginSheet';
+import LoginModal from '@/components/LoginModal';
 
 interface CardItem {
   id: string;
@@ -53,7 +53,7 @@ export default function MyPage() {
         >
           {t('common:my.login')}
         </button>
-        <LoginSheet isOpen={loginOpen} onClose={() => setLoginOpen(false)} />
+        <LoginModal isOpen={loginOpen} onClose={() => setLoginOpen(false)} />
       </main>
     );
   }
@@ -77,16 +77,24 @@ export default function MyPage() {
             ))}
           </div>
         ) : cards.length === 0 ? (
-          <div className="text-center py-16 space-y-3">
+          <div className="text-center py-16 space-y-4">
             <p className="text-[var(--color-muted-foreground)]">
               {t('common:my.empty')}
             </p>
-            <Link
-              href="/"
-              className="inline-block py-3 px-6 rounded-2xl bg-[var(--color-accent)] text-[var(--color-accent-foreground)] text-sm font-medium"
-            >
-              {t('common:my.firstRecording')}
-            </Link>
+            <div className="flex gap-3 justify-center">
+              <Link
+                href="/"
+                className="py-3 px-6 rounded-2xl bg-[var(--color-accent)] text-[var(--color-accent-foreground)] text-sm font-medium transition-transform active:scale-95"
+              >
+                {t('common:my.firstRecording')}
+              </Link>
+              <Link
+                href="/text"
+                className="py-3 px-6 rounded-2xl glass text-[var(--color-foreground)] text-sm font-medium transition-transform active:scale-95"
+              >
+                {t('common:my.firstText')}
+              </Link>
+            </div>
           </div>
         ) : (
           <div className="grid grid-cols-2 gap-3">
@@ -94,7 +102,7 @@ export default function MyPage() {
               <Link
                 key={card.id}
                 href={`/card/${card.id}`}
-                className="group relative overflow-hidden rounded-2xl shadow-md transition-transform active:scale-95"
+                className="group relative overflow-hidden rounded-2xl transition-transform active:scale-95"
               >
                 <img
                   src={card.image_url}

@@ -62,7 +62,14 @@
   --progress-info: rgb(129, 140, 248);
 }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  font-size: 18px;     /* PWA: 큼직한 기본 폰트 */
+}
+
+@media (min-width: 768px) {
+  html { font-size: 16px; }   /* 태블릿/데스크탑은 살짝 줄이기 */
+}
 
 body {
   background: var(--color-background);
@@ -70,6 +77,7 @@ body {
   font-family: "Pretendard Variable", "Pretendard", system-ui, -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
   word-break: keep-all;
   overflow-wrap: break-word;
+  -webkit-text-size-adjust: 100%;
 }
 
 /* ── 고운바탕 — 감성 텍스트용 ── */
@@ -77,17 +85,15 @@ body {
   font-family: "Gowun Batang", serif;
 }
 
-/* ── Glassmorphism card ── */
+/* ── Flat card ── */
 .glass {
-  background: color-mix(in srgb, var(--color-card) 75%, transparent);
-  backdrop-filter: blur(20px) saturate(1.4);
-  -webkit-backdrop-filter: blur(20px) saturate(1.4);
-  border: 1px solid color-mix(in srgb, var(--color-border) 60%, transparent);
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
 }
 
 .dark .glass {
-  background: color-mix(in srgb, var(--color-card) 60%, transparent);
-  border: 1px solid color-mix(in srgb, var(--color-border) 40%, transparent);
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
 }
 
 /* ── Recording pulse animation ── */
@@ -139,9 +145,9 @@ body {
 .emotion-tag {
   display: inline-flex;
   align-items: center;
-  padding: 4px 14px;
+  padding: 6px 18px;
   border-radius: 9999px;
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: 600;
   font-family: "Gowun Batang", serif;
   background: color-mix(in srgb, var(--color-accent) 15%, var(--color-background));

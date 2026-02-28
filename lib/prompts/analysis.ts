@@ -1,5 +1,5 @@
 /**
- * Sumsori — Emotion Analysis Prompt
+ * Sumsori — Voice Analysis Prompt
  * Single Gemini call: audio → voiceTone + textContent + concordance + coreEmotion + summary + imagePrompt
  */
 

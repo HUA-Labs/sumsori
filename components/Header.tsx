@@ -1,18 +1,19 @@
 'use client';
 
 import { useState } from 'react';
-import { useSession } from 'next-auth/react';
+import { useSession, signOut } from 'next-auth/react';
 import { useTranslation } from '@hua-labs/hua/i18n';
 import { ThemeToggle } from '@hua-labs/hua/ui';
 import { Avatar } from '@hua-labs/ui';
-import { User } from '@phosphor-icons/react';
+import { Popover } from '@hua-labs/ui/overlay';
+import { User, SignOut } from '@phosphor-icons/react';
 import { LanguageToggle } from './LanguageToggle';
-import LoginSheet from './LoginSheet';
+import LoginModal from './LoginModal';
 
 export default function Header() {
   const { data: session } = useSession();
   const { t } = useTranslation();
-  const [sheetOpen, setSheetOpen] = useState(false);
+  const [loginOpen, setLoginOpen] = useState(false);
 
   return (
     <>
@@ -22,25 +23,66 @@ export default function Header() {
         <div className="flex items-center gap-2">
           <LanguageToggle />
           <ThemeToggle variant="icon" />
-          <button
-            onClick={() => setSheetOpen(true)}
-            className="w-9 h-9 rounded-full flex items-center justify-center transition-colors hover:bg-[var(--color-muted)]"
-            aria-label={t('common:nav.profile')}
-          >
-            {session?.user ? (
-              <Avatar
-                src={session.user.image ?? undefined}
-                alt={session.user.name ?? ''}
-                size="sm"
-              />
-            ) : (
+
+          {session?.user ? (
+            /* ── Logged in: Profile Popover ── */
+            <Popover
+              position="bottom"
+              align="end"
+              trigger={
+                <button
+                  className="w-9 h-9 rounded-full flex items-center justify-center transition-colors hover:bg-[var(--color-muted)]"
+                  aria-label={t('common:nav.profile')}
+                >
+                  <Avatar
+                    src={session.user.image ?? undefined}
+                    alt={session.user.name ?? ''}
+                    size="sm"
+                  />
+                </button>
+              }
+            >
+              <div className="w-64">
+                {/* User info */}
+                <div className="flex flex-col items-center gap-3 px-5 py-5 border-b border-[var(--color-border)]">
+                  <Avatar
+                    src={session.user.image ?? undefined}
+                    alt={session.user.name ?? ''}
+                    size="lg"
+                  />
+                  <div className="text-center">
+                    <p className="text-lg font-semibold">{session.user.name}</p>
+                    <p className="text-sm text-[var(--color-muted-foreground)]">Kakao</p>
+                  </div>
+                </div>
+
+                {/* Actions */}
+                <div className="p-3">
+                  <button
+                    onClick={() => signOut()}
+                    className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-2xl text-base text-[var(--color-muted-foreground)] transition-colors hover:bg-[var(--color-muted)]"
+                  >
+                    <SignOut size={20} />
+                    {t('common:auth.logout')}
+                  </button>
+                </div>
+              </div>
+            </Popover>
+          ) : (
+            /* ── Logged out: Login button → Modal ── */
+            <button
+              onClick={() => setLoginOpen(true)}
+              className="w-9 h-9 rounded-full flex items-center justify-center transition-colors hover:bg-[var(--color-muted)]"
+              aria-label={t('common:nav.profile')}
+            >
               <User size={20} weight="bold" />
-            )}
-          </button>
+            </button>
+          )}
         </div>
       </header>
 
-      <LoginSheet isOpen={sheetOpen} onClose={() => setSheetOpen(false)} />
+      {/* Login Modal */}
+      <LoginModal isOpen={loginOpen} onClose={() => setLoginOpen(false)} />
     </>
   );
 }
