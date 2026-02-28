@@ -51,7 +51,7 @@ export default function TextPage() {
       setError(t('common:error.serverError'));
       setAppState('TEXT_INPUT');
     }
-  }, [text, voice, currentLanguage]);
+  }, [text, voice, currentLanguage, t]);
 
   const handleDemo = useCallback(async () => {
     setAppState('ANALYZING');
@@ -70,7 +70,7 @@ export default function TextPage() {
       setError(t('common:error.demoFailed'));
       setAppState('TEXT_INPUT');
     }
-  }, [currentLanguage]);
+  }, [currentLanguage, t]);
 
   const handleSaveMessage = useCallback(async () => {
     if (!result?.cardId || result.cardId === 'demo') return;
@@ -202,127 +202,88 @@ export default function TextPage() {
 
       {/* ── RESULT ── */}
       {appState === 'RESULT' && result && (
-        <div className="w-full max-w-md md:max-w-lg space-y-6 fade-in">
-          {/* Image */}
-          <div className="overflow-hidden rounded-2xl">
+        <div className="w-full max-w-md md:max-w-lg fade-in">
+          <div className="glass rounded-2xl overflow-hidden">
+            {/* Image */}
             <img
               src={result.image.url}
               alt={result.coreEmotion}
               className="aspect-square w-full object-cover"
             />
-          </div>
 
-          {/* Core Emotion */}
-          <div className="text-center">
-            <span className="emotion-tag text-lg">
-              #{result.coreEmotion}
-            </span>
-          </div>
-
-          {/* Summary */}
-          <p className="font-batang text-center text-xl md:text-2xl leading-relaxed text-[var(--color-foreground)]">
-            &ldquo;{result.summary}&rdquo;
-          </p>
-
-          {/* Audio Player */}
-          {result.audio.url && (
-            <div className="glass rounded-2xl p-5 space-y-3">
-              <p className="text-base font-medium text-[var(--color-foreground)]">
-                {t('common:textMode.playVoice')}
-              </p>
-              <audio
-                ref={audioRef}
-                src={result.audio.url}
-                controls
-                className="w-full h-10"
-              />
-            </div>
-          )}
-
-          {/* Surface vs Hidden Emotion */}
-          <div className="glass rounded-2xl p-5 space-y-4">
-            <div className="grid grid-cols-2 gap-4">
-              {/* Surface */}
-              <div className="space-y-1">
-                <p className="text-sm text-[var(--color-muted-foreground)]">
-                  {t('common:textMode.surfaceEmotion')}
-                </p>
-                <p className="font-medium text-lg">{result.surfaceEmotion.emotion}</p>
+            <div className="p-6 space-y-5">
+              {/* Core Emotion */}
+              <div className="text-center">
+                <span className="emotion-tag text-lg">
+                  #{result.coreEmotion}
+                </span>
               </div>
-              {/* Hidden */}
-              <div className="space-y-1">
-                <p className="text-sm text-[var(--color-muted-foreground)]">
-                  {t('common:textMode.hiddenEmotion')}
-                </p>
-                <p className="font-medium text-lg">{result.hiddenEmotion.emotion}</p>
-              </div>
-            </div>
-            {/* Concordance */}
-            <div className="flex items-center gap-2 text-sm text-[var(--color-muted-foreground)] border-t border-[var(--color-border)]/40 pt-3">
-              <span>
-                {t('common:result.concordance')}:{' '}
-                {result.concordance.match === 'high'
-                  ? t('common:result.concordanceHigh')
-                  : result.concordance.match === 'medium'
-                    ? t('common:result.concordanceMedium')
-                    : t('common:result.concordanceLow')}
-              </span>
-              <span>— {result.concordance.explanation}</span>
-            </div>
-          </div>
 
-          {/* Hidden emotion reasoning */}
-          {result.hiddenEmotion.reasoning && (
-            <div className="glass rounded-2xl p-5">
-              <p className="text-base leading-relaxed text-[var(--color-muted-foreground)]">
-                {result.hiddenEmotion.reasoning}
+              {/* Summary */}
+              <p className="font-batang text-center text-xl md:text-2xl leading-relaxed text-[var(--color-foreground)]">
+                &ldquo;{result.summary}&rdquo;
               </p>
-            </div>
-          )}
 
-          {/* Personal Message */}
-          {result.cardId !== 'demo' && (
-            <div className="space-y-3">
-              <textarea
-                value={personalMessage}
-                onChange={(e) => setPersonalMessage(e.target.value)}
-                placeholder={t('common:result.messagePlaceholder')}
-                className="w-full p-4 rounded-2xl bg-[var(--color-muted)] text-[var(--color-foreground)] placeholder:text-[var(--color-muted-foreground)] text-base resize-none border border-[var(--color-border)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]"
-                rows={2}
-                maxLength={200}
-                disabled={messageSaved}
-              />
-              {personalMessage.trim() && !messageSaved && (
+              {/* Audio Player */}
+              {result.audio.url && (
+                <div className="rounded-xl p-4 bg-[var(--color-muted)]/50 space-y-3">
+                  <p className="text-sm font-medium text-[var(--color-foreground)]">
+                    {t('common:textMode.playVoice')}
+                  </p>
+                  <audio
+                    ref={audioRef}
+                    src={result.audio.url}
+                    controls
+                    className="w-full h-10"
+                  />
+                </div>
+              )}
+
+              {/* Personal Message */}
+              {result.cardId !== 'demo' && (
+                <div className="space-y-3">
+                  <textarea
+                    value={personalMessage}
+                    onChange={(e) => setPersonalMessage(e.target.value)}
+                    placeholder={t('common:result.messagePlaceholder')}
+                    className="w-full p-4 rounded-xl bg-[var(--color-muted)] text-[var(--color-foreground)] placeholder:text-[var(--color-muted-foreground)] text-base resize-none border border-[var(--color-border)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]"
+                    rows={2}
+                    maxLength={200}
+                    disabled={messageSaved}
+                  />
+                  {personalMessage.trim() && !messageSaved && (
+                    <button
+                      onClick={handleSaveMessage}
+                      className="w-full py-3 rounded-xl bg-[var(--color-secondary)] text-[var(--color-secondary-foreground)] text-base transition-transform active:scale-95"
+                    >
+                      {t('common:result.saveMessage')}
+                    </button>
+                  )}
+                  {messageSaved && (
+                    <p className="text-sm text-center text-[var(--color-muted-foreground)]">{t('common:result.saved')}</p>
+                  )}
+                </div>
+              )}
+
+              {/* Share + Reset */}
+              <div className="space-y-3 pt-1">
+                {result.cardId !== 'demo' && (
+                  <button
+                    onClick={handleShare}
+                    className="w-full py-5 rounded-2xl bg-[var(--color-accent)] text-[var(--color-accent-foreground)] font-semibold text-lg transition-transform active:scale-95"
+                  >
+                    {shared ? t('common:result.shared') : t('common:result.share')}
+                  </button>
+                )}
+
                 <button
-                  onClick={handleSaveMessage}
-                  className="w-full py-3 rounded-xl bg-[var(--color-secondary)] text-[var(--color-secondary-foreground)] text-base transition-transform active:scale-95"
+                  onClick={handleReset}
+                  className="w-full py-4 rounded-2xl text-[var(--color-muted-foreground)] text-base transition-transform active:scale-95"
                 >
-                  {t('common:result.saveMessage')}
+                  {t('common:textMode.writeAgain')}
                 </button>
-              )}
-              {messageSaved && (
-                <p className="text-sm text-center text-[var(--color-muted-foreground)]">{t('common:result.saved')}</p>
-              )}
+              </div>
             </div>
-          )}
-
-          {/* Share + Reset */}
-          <div className="space-y-3 pt-2">
-            {result.cardId !== 'demo' && (
-              <button
-                onClick={handleShare}
-                className="w-full py-5 rounded-2xl bg-[var(--color-accent)] text-[var(--color-accent-foreground)] font-semibold text-lg transition-transform active:scale-95"
-              >
-                {shared ? t('common:result.shared') : t('common:result.share')}
-              </button>
-            )}
-
-            <button
-              onClick={handleReset}
-              className="w-full py-4 rounded-2xl glass text-[var(--color-foreground)] text-base transition-transform active:scale-95"
-            >
-              {t('common:textMode.writeAgain')}
-            </button>
           </div>
         </div>
       )}

@@ -42,7 +42,7 @@ Return a JSON object with this exact structure:
     "emotion": "emotion explicitly conveyed by the text (in English)",
     "themes": ["theme1", "theme2"],
     "keywords": ["keyword1", "keyword2"],
-    "sentiment": -1.0 to 1.0
+    "sentiment": 0.0
   },
   "hiddenEmotion": {
     "emotion": "the real emotion beneath the surface (in English)",
@@ -75,6 +75,7 @@ Return a JSON object with this exact structure:
 
 IMPORTANT:
 - Respond ONLY with valid JSON, no markdown formatting.
+- sentiment must be a number between -1.0 (negative) and 1.0 (positive).
 - surfaceEmotion.emotion must come from the LITERAL text meaning.
 - hiddenEmotion.emotion must come from READING BETWEEN THE LINES.
 - These two CAN and SHOULD differ when the text hides a different story.

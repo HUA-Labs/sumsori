@@ -57,7 +57,7 @@ export default function HomePage() {
     }
     handleSubmit(file);
     if (fileInputRef.current) fileInputRef.current.value = '';
-  }, []);
+  }, [t]);
 
   const handleDemo = useCallback(async () => {
     setAppState('ANALYZING');
