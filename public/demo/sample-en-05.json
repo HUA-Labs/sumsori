@@ -1,0 +1,46 @@
+{
+  "voiceTone": {
+    "emotion": "tenderness",
+    "energy": 55,
+    "pace": "normal",
+    "stability": 90,
+    "details": "The voice is stable and calm, with a slightly lower pitch that conveys sincerity. There are natural pauses, indicating thoughtful delivery, and no noticeable breathiness or tremor, lending an air of gentle warmth."
+  },
+  "textContent": {
+    "emotion": "gratitude",
+    "themes": [
+      "friendship",
+      "nostalgia",
+      "appreciation",
+      "enduring relationships",
+      "emotional support"
+    ],
+    "keywords": [
+      "college",
+      "laughing",
+      "everything",
+      "messy",
+      "good",
+      "person"
+    ],
+    "sentiment": 0.9,
+    "transcript": "I was cleaning out my phone yesterday and found this video of us from college. We were just laughing about nothing in the parking lot at like 2:00 a.m. and I realized, you're the only person who's been there through everything, the messy stuff, the good stuff, all of it. I don't say it enough, but you're my person."
+  },
+  "concordance": {
+    "match": "high",
+    "explanation": "The gentle, warm, and sincere voice tone perfectly aligns with the heartfelt message of deep appreciation and an enduring bond expressed in the words."
+  },
+  "coreEmotion": "tenderness",
+  "summary": "A soft and genuine voice delivers a profound affirmation of a cherished friendship, steeped in nostalgic warmth and deep affection.",
+  "imagePrompt": {
+    "format": "SQUARE 1:1, fills entire canvas edge to edge, NO margins/borders/vignette",
+    "character": "one small, round, simple white cat (NOT human-like, NOT realistic cat)",
+    "angle": "THREE-QUARTER BACK VIEW only (hint of one eye OK, never fully front-facing)",
+    "style": "oil pastel and crayon on thick textured paper. Visible rough strokes and paper grain. NO black outlines — shapes defined by color contrast only. Edges soft and rough like real crayon. Simple, minimal, children's picture book. NOT photorealistic, NOT 3D, NOT anime, NOT smooth digital",
+    "scene": "bridge over quiet river",
+    "catPose": "sitting still looking away",
+    "colorPalette": "soft coral/pink",
+    "lighting": "twilight gradient sky",
+    "forbidden": "NO text, NO words, NO letters, NO human faces, NO other animals"
+  }
+}

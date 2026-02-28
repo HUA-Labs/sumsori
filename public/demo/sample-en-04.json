@@ -1,0 +1,44 @@
+{
+  "voiceTone": {
+    "emotion": "reflective sincerity",
+    "energy": 45,
+    "pace": "normal",
+    "stability": 90,
+    "details": "The speaker's voice is calm and measured, with deliberate pacing and well-placed pauses, particularly before key phrases like 'I finally get it now' and 'I get it. Thank you.' This gives the impression of thoughtful reflection rather than hurried speech. Pitch is stable, and volume is consistent, conveying a sense of genuine conviction."
+  },
+  "textContent": {
+    "emotion": "appreciation",
+    "themes": [
+      "parental wisdom",
+      "maturation",
+      "gratitude"
+    ],
+    "keywords": [
+      "Dad",
+      "get it",
+      "Saturday mornings",
+      "saving money",
+      "own kid",
+      "Thank you"
+    ],
+    "sentiment": 0.9,
+    "transcript": "You know what, Dad? I finally get it now. All those Saturday mornings you dragged me to the park. All those boring talks about saving money. I thought you were just being annoying, but now that I have my own kid, I get it. Thank you."
+  },
+  "concordance": {
+    "match": "high",
+    "explanation": "The voice tone's reflective sincerity perfectly aligns with the text's message of newfound understanding and heartfelt gratitude."
+  },
+  "coreEmotion": "gratitude",
+  "summary": "A profound realization gently dawns upon the speaker, transforming past annoyance into deep, heartfelt appreciation for a father's enduring wisdom.",
+  "imagePrompt": {
+    "format": "SQUARE 1:1, fills entire canvas edge to edge, NO margins/borders/vignette",
+    "character": "one small, round, simple white cat (NOT human-like, NOT realistic cat)",
+    "angle": "THREE-QUARTER BACK VIEW only (hint of one eye OK, never fully front-facing)",
+    "style": "oil pastel and crayon on thick textured paper. Visible rough strokes and paper grain. NO black outlines — shapes defined by color contrast only. Edges soft and rough like real crayon. Simple, minimal, children's picture book. NOT photorealistic, NOT 3D, NOT anime, NOT smooth digital",
+    "scene": "beach shore at sunset",
+    "catPose": "looking up at sky",
+    "colorPalette": "warm peach/amber/gold",
+    "lighting": "twilight gradient sky",
+    "forbidden": "NO text, NO words, NO letters, NO human faces, NO other animals"
+  }
+}

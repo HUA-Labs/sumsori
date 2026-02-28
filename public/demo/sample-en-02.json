@@ -1,44 +1,46 @@
 {
   "voiceTone": {
-    "emotion": "subdued",
-    "energy": 30,
+    "emotion": "dejection",
+    "energy": 25,
     "pace": "slow",
-    "stability": 85,
-    "details": "The voice maintains a low-to-mid pitch range with minimal inflection, creating a somewhat flat and monotonous delivery. Pauses are natural, but the overall slow pace and lack of vocal energy contribute to a weary, detached feel."
+    "stability": 60,
+    "details": "The voice is low-pitched and delivered slowly, with noticeable pauses before key phrases. There's a slight tremor in the voice, particularly towards the end, indicating emotional strain. Breathing is audible and somewhat shallow, contributing to an overall somber and heavy quality."
   },
   "textContent": {
-    "emotion": "disappointment",
+    "emotion": "regret",
     "themes": [
-      "unrequited effort",
-      "personal loss",
-      "acceptance of reality",
-      "betrayal"
+      "memory",
+      "loss",
+      "inaction",
+      "lingering regret"
     ],
     "keywords": [
-      "everything you have",
-      "not enough",
-      "walk away",
-      "mattered",
-      "that's life"
+      "thinking",
+      "last morning",
+      "door",
+      "bag",
+      "wanted to say",
+      "stood there",
+      "hear it closing"
     ],
     "sentiment": -0.8,
-    "transcript": "I just think it's interesting, you know, how you can give everything you have to someone, every single day for years, and they just, decide it wasn't enough. They just walk away like none of it mattered. But hey, that's life I guess."
+    "transcript": "I keep thinking about that last morning. She was standing by the door with her bag, and I wanted to say something, anything, but I just stood there. And now every time I pass that door, I still hear it closing."
   },
   "concordance": {
     "match": "high",
-    "explanation": "The subdued and weary voice tone perfectly aligns with the text's narrative of giving profoundly and experiencing unappreciated loss, concluding with a resigned acceptance."
+    "explanation": "The slow, heavy, and slightly trembling voice perfectly aligns with the somber and regretful nature of the words, conveying a deep, lingering sadness."
   },
-  "coreEmotion": "resignation",
-  "summary": "A quiet voice recounts the bittersweet pain of unacknowledged effort and ultimately accepts the harsh simplicity of life's unpredictable turns.",
+  "coreEmotion": "dejection",
+  "summary": "A quiet, lonely sadness permeates the voice, reflecting a persistent regret over unspoken words and the haunting memory of a departure.",
   "imagePrompt": {
     "format": "SQUARE 1:1, fills entire canvas edge to edge, NO margins/borders/vignette",
     "character": "one small, round, simple white cat (NOT human-like, NOT realistic cat)",
-    "angle": "THREE-QUARTER BACK VIEW only (hint of one eye OK, never fully front-facing)",
+    "angle": "BEHIND or THREE-QUARTER BACK VIEW only (hint of one eye OK, never fully front-facing)",
     "style": "oil pastel and crayon on thick textured paper. Visible rough strokes and paper grain. NO black outlines — shapes defined by color contrast only. Edges soft and rough like real crayon. Simple, minimal, children's picture book. NOT photorealistic, NOT 3D, NOT anime, NOT smooth digital",
-    "scene": "bridge over quiet river",
-    "catPose": "lying flat",
-    "colorPalette": "muted grays/beige",
-    "lighting": "diffused overcast",
+    "scene": "train platform alone",
+    "catPose": "sitting still looking away",
+    "colorPalette": "cool blues/lavender",
+    "lighting": "single streetlamp glow",
     "forbidden": "NO text, NO words, NO letters, NO human faces, NO other animals"
   }
 }
