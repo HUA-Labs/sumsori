@@ -87,7 +87,7 @@ export default async function CardPage({ params }: PageProps) {
     <main className="min-h-dvh flex flex-col items-center justify-center px-4 py-8">
       <div className="w-full max-w-md space-y-6">
         {/* Image */}
-        <div className="overflow-hidden rounded-2xl">
+        <div className="overflow-hidden rounded-3xl">
           <img
             src={card.image_url}
             alt={card.core_emotion}
@@ -111,7 +111,7 @@ export default async function CardPage({ params }: PageProps) {
 
         {/* Transcript (opt-in by sender) */}
         {card.show_transcript && card.text_content?.transcript && (
-          <div className="glass rounded-xl p-4">
+          <div className="glass rounded-3xl p-4">
             <p className="text-xs text-[var(--color-muted-foreground)] mb-2">
               {locale === 'en' ? 'What was said' : '이런 말을 했어요'}
             </p>

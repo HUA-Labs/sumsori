@@ -18,7 +18,7 @@ export default function BottomNav() {
   if (pathname.startsWith('/card/')) return null;
 
   return (
-    <nav className="fixed bottom-0 inset-x-0 z-40 glass border-t border-[var(--color-border)]/40 pb-[env(safe-area-inset-bottom)]">
+    <nav className="fixed bottom-0 inset-x-0 z-40 bg-[var(--color-nav)] pb-[env(safe-area-inset-bottom)]">
       <div className="flex h-16">
         {tabs.map(({ href, labelKey, icon: Icon }) => {
           const active = href === '/' ? pathname === '/' : pathname.startsWith(href);
@@ -26,13 +26,13 @@ export default function BottomNav() {
             <Link
               key={href}
               href={href}
-              className={`flex-1 flex flex-col items-center justify-center gap-1 text-xs transition-colors ${
+              className={`flex-1 flex flex-col items-center justify-center gap-1 text-sm transition-colors ${
                 active
-                  ? 'text-[var(--color-accent-foreground)] font-semibold'
-                  : 'text-[var(--color-muted-foreground)]'
+                  ? 'text-[var(--color-nav-foreground)] font-semibold'
+                  : 'text-[var(--color-nav-foreground)]/60'
               }`}
             >
-              <Icon size={24} weight={active ? 'fill' : 'regular'} />
+              <Icon size={26} weight={active ? 'fill' : 'regular'} />
               {t(labelKey)}
             </Link>
           );

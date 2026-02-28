@@ -32,7 +32,7 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
         {/* Kakao Login */}
         <button
           onClick={() => signIn('kakao')}
-          className="w-full py-4 rounded-2xl bg-[#FEE500] text-[#191919] text-lg font-semibold transition-transform active:scale-95"
+          className="w-full py-4 rounded-full bg-[#FEE500] text-[#191919] text-lg font-semibold transition-transform active:scale-95"
         >
           {t('common:auth.loginWithKakao')}
         </button>

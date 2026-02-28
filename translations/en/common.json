@@ -2,7 +2,7 @@
   "app": {
     "name": "Sumsori",
     "tagline": "Turn unspoken feelings into pictures",
-    "description": "Speak for one minute, and your voice becomes a picture.\nSend the feelings you couldn't put into words.",
+    "description": "Say a few words, and your voice becomes a picture.\nSend the feelings you couldn't put into words.",
     "footer": "Sumsori — Turn unspoken feelings into pictures",
     "voiceBecamePicture": "A voice became a picture."
   },
@@ -13,11 +13,21 @@
   },
   "recording": {
     "prompt": "Say what's on your mind",
-    "ending": "Ending soon...",
-    "tapToStop": "Tap to stop recording"
+    "ending": "Ending soon",
+    "tapToStop": "Tap to stop recording",
+    "minTime": "Please record at least {{sec}} seconds",
+    "waitMin": "Keep going a little more",
+    "duration": "{{min}}–{{max}} sec"
+  },
+  "preview": {
+    "title": "Check your recording",
+    "duration": "{{sec}} seconds recorded",
+    "submit": "Send your heart",
+    "reRecord": "Record again",
+    "cancel": "Start over"
   },
   "analyzing": {
-    "listening": "Listening to your voice...",
+    "listening": "Listening to your voice",
     "processing": "Reading your heart and painting a picture",
     "step1": "Listening to your voice",
     "step2": "Reading between the lines",
@@ -62,8 +72,9 @@
     "logout": "Log out"
   },
   "textMode": {
-    "title": "Say what you can't — we'll deliver it",
-    "placeholder": "Write what you want to say...",
+    "title": "Deliver",
+    "subtitle": "Say what you can't — we'll deliver it",
+    "placeholder": "Write what you want to say",
     "voiceSelect": "Choose a voice",
     "voiceFemaleWarm": "Female · Warm",
     "voiceFemaleFirm": "Female · Firm",

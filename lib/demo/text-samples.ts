@@ -47,15 +47,15 @@ export const TEXT_DEMO_BUNDLES: TextDemoBundle[] = [
         forbidden: 'NO text, NO words, NO letters, NO human faces, NO other animals',
       },
     },
-    imageUrl: '/demo/sample-03.png',
-    audioUrl: '',
+    imageUrl: '/demo/text-ko-01.png',
+    audioUrl: '/demo/text-ko-01.wav',
   },
   {
     analysis: {
       surfaceEmotion: {
         emotion: '그리움',
         themes: ['모녀 관계', '후회', '보고 싶음'],
-        keywords: ['엄마', '보고 싶다', '잔소리', '딸'],
+        keywords: ['엄마', '보고 싶어', '잔소리', '미안'],
         sentiment: -0.3,
       },
       hiddenEmotion: {
@@ -86,20 +86,20 @@ export const TEXT_DEMO_BUNDLES: TextDemoBundle[] = [
         forbidden: 'NO text, NO words, NO letters, NO human faces, NO other animals',
       },
     },
-    imageUrl: '/demo/sample-01.png',
-    audioUrl: '',
+    imageUrl: '/demo/text-ko-02.png',
+    audioUrl: '/demo/text-ko-02.wav',
   },
   {
     analysis: {
       surfaceEmotion: {
         emotion: '분노',
-        themes: ['거부', '혐오', '배신감'],
-        keywords: ['미워', '너무해', '꼴도 보기 싫어'],
+        themes: ['배신감', '서운함', '원망'],
+        keywords: ['너무하다', '어떻게', '밉다'],
         sentiment: -0.9,
       },
       hiddenEmotion: {
         emotion: '서운함',
-        reasoning: '강한 부정의 반복("너무 미워", "너무해") 아래에는 기대했던 사람에게 받은 깊은 상처가 있다.',
+        reasoning: '강한 부정의 말 아래에는 기대했던 사람에게 받은 깊은 상처가 있다.',
       },
       concordance: {
         match: 'medium',
@@ -125,8 +125,8 @@ export const TEXT_DEMO_BUNDLES: TextDemoBundle[] = [
         forbidden: 'NO text, NO words, NO letters, NO human faces, NO other animals',
       },
     },
-    imageUrl: '/demo/sample-02.png',
-    audioUrl: '',
+    imageUrl: '/demo/text-ko-03.png',
+    audioUrl: '/demo/text-ko-03.wav',
   },
 ];
 
@@ -167,8 +167,8 @@ export const TEXT_DEMO_BUNDLES_EN: TextDemoBundle[] = [
         forbidden: 'NO text, NO words, NO letters, NO human faces, NO other animals',
       },
     },
-    imageUrl: '/demo/sample-en-01.png',
-    audioUrl: '',
+    imageUrl: '/demo/text-en-01.png',
+    audioUrl: '/demo/text-en-01.wav',
   },
   {
     analysis: {
@@ -206,15 +206,15 @@ export const TEXT_DEMO_BUNDLES_EN: TextDemoBundle[] = [
         forbidden: 'NO text, NO words, NO letters, NO human faces, NO other animals',
       },
     },
-    imageUrl: '/demo/sample-en-03.png',
-    audioUrl: '',
+    imageUrl: '/demo/text-en-02.png',
+    audioUrl: '/demo/text-en-02.wav',
   },
   {
     analysis: {
       surfaceEmotion: {
         emotion: 'appreciation',
         themes: ['parental wisdom', 'maturation', 'gratitude'],
-        keywords: ['Dad', 'get it', 'Saturday mornings', 'Thank you'],
+        keywords: ['Dad', 'understand', 'Saturday mornings', 'Thank you'],
         sentiment: 0.9,
       },
       hiddenEmotion: {
@@ -245,8 +245,8 @@ export const TEXT_DEMO_BUNDLES_EN: TextDemoBundle[] = [
         forbidden: 'NO text, NO words, NO letters, NO human faces, NO other animals',
       },
     },
-    imageUrl: '/demo/sample-en-04.png',
-    audioUrl: '',
+    imageUrl: '/demo/text-en-03.png',
+    audioUrl: '/demo/text-en-03.wav',
   },
 ];
 
