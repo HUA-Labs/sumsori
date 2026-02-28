@@ -37,3 +37,5 @@ next-env.d.ts
 .hua-agent-docs/
 .claude/
 .cursor/
+CLAUDE.md
+*.code-workspace

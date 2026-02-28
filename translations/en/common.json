@@ -1,69 +1,67 @@
 {
-  "welcome": {
-    "hero": {
-      "eyebrow": "AI-first UX framework",
-      "title": "{{projectName}} ships better experiences faster",
-      "description": "HUA UX bundles UI, motion, i18n, and AI context so you can scaffold once and focus on product sense.",
-      "primaryCta": "Open documentation",
-      "secondaryCta": "Browse components"
-    },
-    "stats": {
-      "components": {
-        "label": "UI building blocks",
-        "value": "120+"
-      },
-      "locales": {
-        "label": "Locales ready",
-        "value": "70+"
-      },
-      "motion": {
-        "label": "Motion presets",
-        "value": "40+"
-      },
-      "ai": {
-        "label": "AI context files",
-        "value": "3"
-      }
-    },
-    "features": {
-      "title": "Everything wired in",
-      "description": "Design tokens, global state, translations, and dev workflow automation are ready on day one.",
-      "design": {
-        "title": "Design system baked in",
-        "description": "Tailwind v4 theme, @theme variables, and branding controls keep styles consistent."
-      },
-      "i18n": {
-        "title": "Production i18n",
-        "description": "API + SSR loaders, Zustand adapter, and CLI helpers manage translations end-to-end."
-      },
-      "motion": {
-        "title": "Motion kit",
-        "description": "Shared animation primitives from motion-core and motion-advanced provide consistent interactions."
-      },
-      "workflow": {
-        "title": "Developer workflow",
-        "description": "CLI validations, AI context, and workspace detection remove repetitive setup."
-      }
-    },
-    "links": {
-      "title": "Next steps",
-      "description": "Jump into the docs, start from a template, or explore the GitHub repository.",
-      "docs": {
-        "title": "Documentation",
-        "description": "Framework guides, API references, and UX patterns."
-      },
-      "templates": {
-        "title": "Starter templates",
-        "description": "HUA UX powered examples for product, marketing, and dashboard flows."
-      },
-      "github": {
-        "title": "GitHub",
-        "description": "Audit the source, open issues, or contribute fixes."
-      }
-    },
-    "title": "HUA UX App",
-    "description": "Get started by editing app/page.tsx",
-    "getStarted": "Get Started",
-    "learnMore": "Learn More"
+  "app": {
+    "name": "Sumsori",
+    "tagline": "Turn unspoken feelings into pictures",
+    "description": "Speak for one minute, and your voice becomes a picture.\nSend the feelings you couldn't put into words.",
+    "footer": "Sumsori — Turn unspoken feelings into pictures"
+  },
+  "landing": {
+    "startRecording": "Start Recording",
+    "uploadFile": "Upload Audio File",
+    "tryDemo": "Try Demo"
+  },
+  "recording": {
+    "prompt": "Say what you feel right now",
+    "ending": "Ending soon...",
+    "tapToStop": "Tap to stop recording"
+  },
+  "analyzing": {
+    "listening": "Listening to your voice...",
+    "processing": "Reading emotions and painting your picture"
+  },
+  "result": {
+    "voiceTone": "Voice",
+    "textMeaning": "Words",
+    "concordance": "Match",
+    "concordanceHigh": "High",
+    "concordanceMedium": "Medium",
+    "concordanceLow": "Low",
+    "showTranscript": "Show transcript",
+    "messagePlaceholder": "Add a message for the recipient (optional)",
+    "saveMessage": "Save Message",
+    "saved": "Saved",
+    "share": "Share",
+    "shared": "Shared!",
+    "shareText": "A voice became a picture.",
+    "recordAgain": "Record Again"
+  },
+  "my": {
+    "title": "My Sumsori",
+    "subtitle": "{{name}}'s emotion journal",
+    "empty": "No recordings yet",
+    "firstRecording": "Start your first recording",
+    "loginRequired": "Login required",
+    "login": "Login"
+  },
+  "nav": {
+    "record": "Record",
+    "myCards": "My Cards",
+    "profile": "Profile"
+  },
+  "auth": {
+    "loginWithKakao": "Continue with Kakao",
+    "logout": "Log out"
+  },
+  "error": {
+    "micPermission": "Please allow microphone access.",
+    "fileTooLarge": "File size must be under 10MB.",
+    "demoFailed": "Failed to load demo",
+    "analysisFailed": "Analysis failed",
+    "serverError": "Server connection failed"
+  },
+  "offline": {
+    "title": "Internet connection required",
+    "description": "Sumsori needs an internet connection for voice analysis.",
+    "retry": "Try again"
   }
 }

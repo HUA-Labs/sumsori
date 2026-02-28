@@ -1,0 +1,42 @@
+{
+  "voiceTone": {
+    "emotion": "쓸쓸함",
+    "energy": 30,
+    "pace": "normal",
+    "stability": 80,
+    "details": "낮은 톤으로 차분하게 말하며, 말 끝이 약간 내려가 전체적으로 고요하고 사색적인 분위기를 풍깁니다."
+  },
+  "textContent": {
+    "emotion": "그리움",
+    "themes": [
+      "모녀 관계",
+      "후회",
+      "그리움"
+    ],
+    "keywords": [
+      "엄마",
+      "잔소리",
+      "딸",
+      "보고 싶다"
+    ],
+    "sentiment": -0.4,
+    "transcript": "매번 엄마한테 잔소리만 하는 딸이지만 다시 엄마 많이 보고 싶다."
+  },
+  "concordance": {
+    "match": "high",
+    "explanation": "차분하고 약간 쓸쓸함이 깃든 목소리 톤이 엄마를 그리워하고 지난 행동을 후회하는 내용과 잘 어우러집니다."
+  },
+  "coreEmotion": "그리움",
+  "summary": "잔소리만 하던 딸이 이제는 엄마의 빈자리를 쓸쓸히 그리워하는 마음.",
+  "imagePrompt": {
+    "format": "SQUARE 1:1, fills entire canvas edge to edge, NO margins/borders/vignette",
+    "character": "one small, round, simple white cat (NOT human-like, NOT realistic cat)",
+    "angle": "BEHIND or THREE-QUARTER BACK VIEW only (hint of one eye OK, never fully front-facing)",
+    "style": "oil pastel and crayon on thick textured paper. Visible rough strokes and paper grain. NO black outlines — shapes defined by color contrast only. Edges soft and rough like real crayon. Simple, minimal, children's picture book. NOT photorealistic, NOT 3D, NOT anime, NOT smooth digital",
+    "scene": "empty bus stop at dusk",
+    "catPose": "sitting still looking away",
+    "colorPalette": "warm peach/amber/gold",
+    "lighting": "twilight gradient sky",
+    "forbidden": "NO text, NO words, NO letters, NO human faces, NO other animals"
+  }
+}

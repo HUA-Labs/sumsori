@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useCallback, useEffect, useRef } from 'react';
+import { useTranslation } from '@hua-labs/hua/i18n';
 import { useAudioRecorder } from '@/hooks/useAudioRecorder';
 import type { AnalyzeResponse } from '@/lib/types';
 
@@ -9,6 +10,7 @@ const ACCEPTED_AUDIO_TYPES = 'audio/webm,audio/mp4,audio/m4a,audio/mpeg,audio/mp
 type AppState = 'LANDING' | 'RECORDING' | 'ANALYZING' | 'RESULT';
 
 export default function HomePage() {
+  const { t, currentLanguage } = useTranslation();
   const recorder = useAudioRecorder();
 
   const [appState, setAppState] = useState<AppState>('LANDING');
@@ -36,7 +38,7 @@ export default function HomePage() {
       await recorder.start();
       setAppState('RECORDING');
     } catch {
-      setError('마이크 권한을 허용해주세요.');
+      setError(t('common:error.micPermission'));
     }
   }, [recorder]);
 
@@ -47,13 +49,11 @@ export default function HomePage() {
   const handleFileUpload = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    // 10MB 제한
     if (file.size > 10 * 1024 * 1024) {
-      setError('파일 크기는 10MB 이하만 가능해요.');
+      setError(t('common:error.fileTooLarge'));
       return;
     }
     handleSubmit(file);
-    // input 초기화 (같은 파일 재선택 가능)
     if (fileInputRef.current) fileInputRef.current.value = '';
   }, []);
 
@@ -70,7 +70,7 @@ export default function HomePage() {
         setAppState('RESULT');
       }
     } catch {
-      setError('데모 로드 실패');
+      setError(t('common:error.demoFailed'));
       setAppState('LANDING');
     }
   }, []);
@@ -80,17 +80,18 @@ export default function HomePage() {
     try {
       const formData = new FormData();
       formData.append('audio', blob, 'recording.webm');
+      formData.append('locale', currentLanguage);
       const res = await fetch('/api/analyze', { method: 'POST', body: formData });
       const json: AnalyzeResponse = await res.json();
       if (json.data) {
         setResult(json.data);
         setAppState('RESULT');
       } else {
-        setError(json.error ?? '분석 실패');
+        setError(json.error ?? t('common:error.analysisFailed'));
         setAppState('LANDING');
       }
     } catch {
-      setError('서버 연결 실패');
+      setError(t('common:error.serverError'));
       setAppState('LANDING');
     }
   }, []);
@@ -113,8 +114,8 @@ export default function HomePage() {
     try {
       if (navigator.share) {
         await navigator.share({
-          title: `#${result.coreEmotion} — 숨소리`,
-          text: '목소리가 그림이 되었어요.',
+          title: `#${result.coreEmotion} — ${t('common:app.name')}`,
+          text: t('common:result.shareText'),
           url,
         });
       } else {
@@ -146,17 +147,15 @@ export default function HomePage() {
         <div className="w-full max-w-md text-center space-y-8 fade-in">
           {/* Logo */}
           <div className="space-y-2">
-            <h1 className="text-4xl font-bold tracking-tight">숨소리</h1>
+            <h1 className="text-4xl font-bold tracking-tight">{t('common:app.name')}</h1>
             <p className="font-batang text-[var(--color-muted-foreground)] text-lg">
-              말하지 못한 마음을 그림으로
+              {t('common:app.tagline')}
             </p>
           </div>
 
           {/* Description */}
-          <p className="text-sm text-[var(--color-muted-foreground)] leading-relaxed">
-            1분만 말하면, 목소리가 그림이 됩니다.
-            <br />
-            말로 전하지 못한 마음을 그림으로 보내세요.
+          <p className="text-sm text-[var(--color-muted-foreground)] leading-relaxed whitespace-pre-line">
+            {t('common:app.description')}
           </p>
 
           {/* Error */}
@@ -170,14 +169,14 @@ export default function HomePage() {
               onClick={handleStart}
               className="w-full py-4 rounded-2xl bg-[var(--color-accent)] text-white font-semibold text-lg transition-transform active:scale-95 shadow-lg"
             >
-              녹음 시작하기
+              {t('common:landing.startRecording')}
             </button>
 
             <button
               onClick={() => fileInputRef.current?.click()}
               className="w-full py-3 rounded-2xl glass text-[var(--color-foreground)] text-sm transition-transform active:scale-95"
             >
-              음성 파일 업로드
+              {t('common:landing.uploadFile')}
             </button>
             <input
               ref={fileInputRef}
@@ -191,7 +190,7 @@ export default function HomePage() {
               onClick={handleDemo}
               className="w-full py-3 rounded-2xl glass text-[var(--color-foreground)] text-sm transition-transform active:scale-95"
             >
-              데모로 체험하기
+              {t('common:landing.tryDemo')}
             </button>
           </div>
 
@@ -207,7 +206,7 @@ export default function HomePage() {
               {formatTime(recorder.elapsed)}
             </p>
             <p className="text-sm text-[var(--color-muted-foreground)]">
-              {recorder.elapsed >= 55 ? '곧 종료됩니다...' : '지금 느끼는 감정을 말해보세요'}
+              {recorder.elapsed >= 55 ? t('common:recording.ending') : t('common:recording.prompt')}
             </p>
           </div>
 
@@ -231,7 +230,7 @@ export default function HomePage() {
           </button>
 
           <p className="text-xs text-[var(--color-muted-foreground)]">
-            탭하여 녹음 중지
+            {t('common:recording.tapToStop')}
           </p>
         </div>
       )}
@@ -246,10 +245,10 @@ export default function HomePage() {
 
           <div className="space-y-2">
             <p className="font-batang text-lg">
-              당신의 목소리를 듣고 있어요...
+              {t('common:analyzing.listening')}
             </p>
             <p className="text-sm text-[var(--color-muted-foreground)]">
-              감정을 읽고 그림을 그리는 중입니다
+              {t('common:analyzing.processing')}
             </p>
           </div>
 
@@ -289,14 +288,14 @@ export default function HomePage() {
           {/* Concordance */}
           <div className="glass rounded-xl p-4 space-y-2">
             <div className="flex items-center gap-2 text-sm">
-              <span className="text-[var(--color-muted-foreground)]">목소리</span>
+              <span className="text-[var(--color-muted-foreground)]">{t('common:result.voiceTone')}</span>
               <span className="font-medium">{result.voiceTone.emotion}</span>
               <span className="text-[var(--color-muted-foreground)]">|</span>
-              <span className="text-[var(--color-muted-foreground)]">말의 뜻</span>
+              <span className="text-[var(--color-muted-foreground)]">{t('common:result.textMeaning')}</span>
               <span className="font-medium">{result.textContent.emotion}</span>
             </div>
             <div className="flex items-center gap-2 text-xs text-[var(--color-muted-foreground)]">
-              <span>일치도: {result.concordance.match === 'high' ? '높음' : result.concordance.match === 'medium' ? '보통' : '낮음'}</span>
+              <span>{t('common:result.concordance')}: {result.concordance.match === 'high' ? t('common:result.concordanceHigh') : result.concordance.match === 'medium' ? t('common:result.concordanceMedium') : t('common:result.concordanceLow')}</span>
               <span>— {result.concordance.explanation}</span>
             </div>
           </div>
@@ -305,7 +304,7 @@ export default function HomePage() {
           {result.textContent.transcript && (
             <details className="glass rounded-xl p-4">
               <summary className="text-sm text-[var(--color-muted-foreground)] cursor-pointer">
-                음성 텍스트 보기
+                {t('common:result.showTranscript')}
               </summary>
               <p className="mt-2 text-sm leading-relaxed">
                 {result.textContent.transcript}
@@ -319,7 +318,7 @@ export default function HomePage() {
               <textarea
                 value={personalMessage}
                 onChange={(e) => setPersonalMessage(e.target.value)}
-                placeholder="받는 사람에게 한마디 (선택)"
+                placeholder={t('common:result.messagePlaceholder')}
                 className="w-full p-3 rounded-xl bg-[var(--color-muted)] text-[var(--color-foreground)] placeholder:text-[var(--color-muted-foreground)] text-sm resize-none border border-[var(--color-border)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]"
                 rows={2}
                 maxLength={200}
@@ -330,11 +329,11 @@ export default function HomePage() {
                   onClick={handleSaveMessage}
                   className="w-full py-2 rounded-xl bg-[var(--color-secondary)] text-[var(--color-secondary-foreground)] text-sm transition-transform active:scale-95"
                 >
-                  메시지 저장
+                  {t('common:result.saveMessage')}
                 </button>
               )}
               {messageSaved && (
-                <p className="text-xs text-center text-[var(--color-muted-foreground)]">저장됨</p>
+                <p className="text-xs text-center text-[var(--color-muted-foreground)]">{t('common:result.saved')}</p>
               )}
             </div>
           )}
@@ -346,7 +345,7 @@ export default function HomePage() {
                 onClick={handleShare}
                 className="w-full py-4 rounded-2xl bg-[var(--color-accent)] text-white font-semibold text-base transition-transform active:scale-95 shadow-lg"
               >
-                {shared ? '공유 완료!' : '공유하기'}
+                {shared ? t('common:result.shared') : t('common:result.share')}
               </button>
             )}
 
@@ -354,7 +353,7 @@ export default function HomePage() {
               onClick={handleReset}
               className="w-full py-3 rounded-2xl glass text-[var(--color-foreground)] text-sm transition-transform active:scale-95"
             >
-              다시 녹음하기
+              {t('common:result.recordAgain')}
             </button>
           </div>
         </div>
