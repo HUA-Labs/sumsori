@@ -49,7 +49,7 @@ export default function MyPage() {
         <p className="text-[var(--color-muted-foreground)]">{t('common:my.loginRequired')}</p>
         <button
           onClick={() => setLoginOpen(true)}
-          className="py-3 px-6 rounded-2xl bg-[var(--color-accent)] text-[var(--color-accent-foreground)] text-sm font-medium transition-transform active:scale-95"
+          className="py-3 px-6 rounded-full bg-[var(--color-accent)] text-[var(--color-accent-foreground)] text-sm font-medium transition-transform active:scale-95"
         >
           {t('common:my.login')}
         </button>
@@ -73,7 +73,7 @@ export default function MyPage() {
         {loading ? (
           <div className="grid grid-cols-2 gap-3">
             {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="aspect-square rounded-2xl shimmer" />
+              <div key={i} className="aspect-square rounded-3xl shimmer" />
             ))}
           </div>
         ) : cards.length === 0 ? (
@@ -84,13 +84,13 @@ export default function MyPage() {
             <div className="flex gap-3 justify-center">
               <Link
                 href="/"
-                className="py-3 px-6 rounded-2xl bg-[var(--color-accent)] text-[var(--color-accent-foreground)] text-sm font-medium transition-transform active:scale-95"
+                className="py-3 px-6 rounded-full bg-[var(--color-accent)] text-[var(--color-accent-foreground)] text-sm font-medium transition-transform active:scale-95"
               >
                 {t('common:my.firstRecording')}
               </Link>
               <Link
                 href="/text"
-                className="py-3 px-6 rounded-2xl glass text-[var(--color-foreground)] text-sm font-medium transition-transform active:scale-95"
+                className="py-3 px-6 rounded-full glass text-[var(--color-foreground)] text-sm font-medium transition-transform active:scale-95"
               >
                 {t('common:my.firstText')}
               </Link>
@@ -102,7 +102,7 @@ export default function MyPage() {
               <Link
                 key={card.id}
                 href={`/card/${card.id}`}
-                className="group relative overflow-hidden rounded-2xl transition-transform active:scale-95"
+                className="group relative overflow-hidden rounded-3xl transition-transform active:scale-95"
               >
                 <img
                   src={card.image_url}

@@ -133,10 +133,13 @@ export default function TextPage() {
     <main className="flex flex-col items-center justify-center px-4 py-8 min-h-[calc(100dvh-theme(spacing.14)-theme(spacing.20))]">
       {/* ── TEXT INPUT ── */}
       {appState === 'TEXT_INPUT' && (
-        <div className="w-full max-w-md md:max-w-lg text-center space-y-6 fade-in">
+        <div className="w-full max-w-md md:max-w-lg text-center space-y-8 fade-in">
           {/* Title */}
           <div className="space-y-2">
-            <h1 className="text-3xl md:text-4xl font-bold tracking-tight">{t('common:textMode.title')}</h1>
+            <h1 className="text-5xl md:text-6xl font-bold tracking-tight">{t('common:textMode.title')}</h1>
+            <p className="text-[var(--color-muted-foreground)] text-xl md:text-2xl">
+              {t('common:textMode.subtitle')}
+            </p>
           </div>
 
           {/* Error */}
@@ -150,7 +153,7 @@ export default function TextPage() {
               value={text}
               onChange={(e) => setText(e.target.value.slice(0, MAX_CHARS))}
               placeholder={t('common:textMode.placeholder')}
-              className="w-full p-5 rounded-2xl bg-[var(--color-muted)] text-[var(--color-foreground)] placeholder:text-[var(--color-muted-foreground)] text-lg resize-none border border-[var(--color-border)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] min-h-[180px]"
+              className="w-full p-5 rounded-3xl bg-[var(--color-muted)] text-[var(--color-foreground)] placeholder:text-[var(--color-muted-foreground)] text-lg resize-none border border-[var(--color-border)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] min-h-[180px]"
               rows={5}
               maxLength={MAX_CHARS}
             />
@@ -159,22 +162,26 @@ export default function TextPage() {
             </span>
           </div>
 
-          {/* Voice Select */}
-          <div className="space-y-2">
-            <label className="text-base text-[var(--color-muted-foreground)]">
+          {/* Voice Chips */}
+          <div className="space-y-3">
+            <p className="text-base text-[var(--color-muted-foreground)]">
               {t('common:textMode.voiceSelect')}
-            </label>
-            <select
-              value={voice}
-              onChange={(e) => setVoice(e.target.value)}
-              className="w-full p-4 rounded-xl bg-[var(--color-muted)] text-[var(--color-foreground)] border border-[var(--color-border)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] text-base"
-            >
+            </p>
+            <div className="flex flex-wrap justify-center gap-2">
               {VOICE_OPTIONS.map(({ key, labelKey }) => (
-                <option key={key} value={key}>
+                <button
+                  key={key}
+                  onClick={() => setVoice(key)}
+                  className={`px-5 py-2.5 rounded-full text-sm transition-all active:scale-95 ${
+                    voice === key
+                      ? 'bg-[var(--color-accent)] text-[var(--color-accent-foreground)] font-semibold'
+                      : 'bg-[var(--color-muted)] text-[var(--color-foreground)] border border-[var(--color-border)]'
+                  }`}
+                >
                   {t(labelKey)}
-                </option>
+                </button>
               ))}
-            </select>
+            </div>
           </div>
 
           {/* Actions */}
@@ -182,14 +189,14 @@ export default function TextPage() {
             <button
               onClick={handleAnalyze}
               disabled={!text.trim()}
-              className="w-full py-5 rounded-2xl bg-[var(--color-accent)] text-[var(--color-accent-foreground)] font-semibold text-xl transition-transform active:scale-95 disabled:opacity-50 disabled:active:scale-100"
+              className="w-full py-5 rounded-full bg-[var(--color-accent)] text-[var(--color-accent-foreground)] font-semibold text-xl transition-transform active:scale-95 disabled:opacity-50 disabled:active:scale-100"
             >
               {t('common:textMode.analyze')}
             </button>
 
             <button
               onClick={handleDemo}
-              className="w-full py-4 rounded-2xl glass text-[var(--color-foreground)] text-base transition-transform active:scale-95"
+              className="w-full py-4 rounded-full glass text-[var(--color-foreground)] text-base transition-transform active:scale-95"
             >
               {t('common:landing.tryDemo')}
             </button>
@@ -203,7 +210,7 @@ export default function TextPage() {
       {/* ── RESULT ── */}
       {appState === 'RESULT' && result && (
         <div className="w-full max-w-md md:max-w-lg fade-in">
-          <div className="glass rounded-2xl overflow-hidden">
+          <div className="glass rounded-3xl overflow-hidden">
             {/* Image */}
             <img
               src={result.image.url}
@@ -226,7 +233,7 @@ export default function TextPage() {
 
               {/* Audio Player */}
               {result.audio.url && (
-                <div className="rounded-xl p-4 bg-[var(--color-muted)]/50 space-y-3">
+                <div className="rounded-3xl p-4 bg-[var(--color-muted)]/50 space-y-3">
                   <p className="text-sm font-medium text-[var(--color-foreground)]">
                     {t('common:textMode.playVoice')}
                   </p>
@@ -246,7 +253,7 @@ export default function TextPage() {
                     value={personalMessage}
                     onChange={(e) => setPersonalMessage(e.target.value)}
                     placeholder={t('common:result.messagePlaceholder')}
-                    className="w-full p-4 rounded-xl bg-[var(--color-muted)] text-[var(--color-foreground)] placeholder:text-[var(--color-muted-foreground)] text-base resize-none border border-[var(--color-border)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]"
+                    className="w-full p-4 rounded-3xl bg-[var(--color-muted)] text-[var(--color-foreground)] placeholder:text-[var(--color-muted-foreground)] text-base resize-none border border-[var(--color-border)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]"
                     rows={2}
                     maxLength={200}
                     disabled={messageSaved}
@@ -254,7 +261,7 @@ export default function TextPage() {
                   {personalMessage.trim() && !messageSaved && (
                     <button
                       onClick={handleSaveMessage}
-                      className="w-full py-3 rounded-xl bg-[var(--color-secondary)] text-[var(--color-secondary-foreground)] text-base transition-transform active:scale-95"
+                      className="w-full py-3 rounded-full bg-[var(--color-secondary)] text-[var(--color-secondary-foreground)] text-base transition-transform active:scale-95"
                     >
                       {t('common:result.saveMessage')}
                     </button>
@@ -270,7 +277,7 @@ export default function TextPage() {
                 {result.cardId !== 'demo' && (
                   <button
                     onClick={handleShare}
-                    className="w-full py-5 rounded-2xl bg-[var(--color-accent)] text-[var(--color-accent-foreground)] font-semibold text-lg transition-transform active:scale-95"
+                    className="w-full py-5 rounded-full bg-[var(--color-accent)] text-[var(--color-accent-foreground)] font-semibold text-lg transition-transform active:scale-95"
                   >
                     {shared ? t('common:result.shared') : t('common:result.share')}
                   </button>
@@ -278,7 +285,7 @@ export default function TextPage() {
 
                 <button
                   onClick={handleReset}
-                  className="w-full py-4 rounded-2xl text-[var(--color-muted-foreground)] text-base transition-transform active:scale-95"
+                  className="w-full py-4 rounded-full text-[var(--color-muted-foreground)] text-base transition-transform active:scale-95"
                 >
                   {t('common:textMode.writeAgain')}
                 </button>
@@ -357,7 +364,7 @@ function AnalyzingOverlay({ t }: { t: (key: string) => string }) {
         </div>
 
         <div className="space-y-4 pt-4">
-          <div className="aspect-[4/3] rounded-2xl shimmer mx-auto" />
+          <div className="aspect-[4/3] rounded-3xl shimmer mx-auto" />
           <div className="h-5 rounded-full shimmer w-1/3 mx-auto" />
           <div className="h-4 rounded-full shimmer w-2/3 mx-auto" />
         </div>

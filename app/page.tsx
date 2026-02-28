@@ -1,14 +1,17 @@
 'use client';
 
-import { useState, useCallback, useEffect, useRef, useMemo } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { useTranslation } from '@hua-labs/hua/i18n';
-import { Ear, Heart, PaintBrush, Sparkle } from '@phosphor-icons/react';
+import { Ear, Heart, PaintBrush, Sparkle, Play, ArrowCounterClockwise } from '@phosphor-icons/react';
 import { useAudioRecorder } from '@/hooks/useAudioRecorder';
 import type { AnalyzeResponse } from '@/lib/types';
 
 const ACCEPTED_AUDIO_TYPES = 'audio/webm,audio/mp4,audio/m4a,audio/mpeg,audio/mp3,audio/wav,audio/ogg,audio/aac,.webm,.m4a,.mp3,.wav,.ogg,.aac,.mp4';
 
-type AppState = 'LANDING' | 'RECORDING' | 'ANALYZING' | 'RESULT';
+type AppState = 'LANDING' | 'RECORDING' | 'PREVIEW' | 'ANALYZING' | 'RESULT';
+
+const MIN_DURATION = 2;
+const MAX_DURATION = 30;
 
 export default function HomePage() {
   const { t, currentLanguage } = useTranslation();
@@ -21,14 +24,28 @@ export default function HomePage() {
   const [messageSaved, setMessageSaved] = useState(false);
   const [shared, setShared] = useState(false);
   const [includeTranscript, setIncludeTranscript] = useState(false);
+  const [recordedDuration, setRecordedDuration] = useState(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const previewAudioRef = useRef<HTMLAudioElement>(null);
+  const previewUrlRef = useRef<string | null>(null);
 
-  // Auto-submit when recording stops
+  // Move to PREVIEW when recording stops (instead of auto-submit)
   useEffect(() => {
     if (recorder.state === 'stopped' && recorder.audioBlob && appState === 'RECORDING') {
-      handleSubmit(recorder.audioBlob);
+      setRecordedDuration(recorder.elapsed);
+      // Clean up previous preview URL
+      if (previewUrlRef.current) URL.revokeObjectURL(previewUrlRef.current);
+      previewUrlRef.current = URL.createObjectURL(recorder.audioBlob);
+      setAppState('PREVIEW');
     }
   }, [recorder.state]);
+
+  // Cleanup preview URL on unmount
+  useEffect(() => {
+    return () => {
+      if (previewUrlRef.current) URL.revokeObjectURL(previewUrlRef.current);
+    };
+  }, []);
 
   const handleStart = useCallback(async () => {
     setError(null);
@@ -45,7 +62,29 @@ export default function HomePage() {
   }, [recorder]);
 
   const handleStop = useCallback(() => {
+    if (recorder.elapsed < MIN_DURATION) return;
     recorder.stop();
+  }, [recorder]);
+
+  const handlePreviewSubmit = useCallback(() => {
+    if (recorder.audioBlob) {
+      handleSubmit(recorder.audioBlob);
+    }
+  }, [recorder.audioBlob]);
+
+  const handleReRecord = useCallback(async () => {
+    if (previewUrlRef.current) {
+      URL.revokeObjectURL(previewUrlRef.current);
+      previewUrlRef.current = null;
+    }
+    setError(null);
+    try {
+      await recorder.start();
+      setAppState('RECORDING');
+    } catch {
+      setError(t('common:error.micPermission'));
+      setAppState('LANDING');
+    }
   }, [recorder]);
 
   const handleFileUpload = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -117,7 +156,6 @@ export default function HomePage() {
   const handleShare = useCallback(async () => {
     if (!result?.cardId || result.cardId === 'demo') return;
 
-    // Save message + transcript preference before sharing
     if (!messageSaved) {
       try {
         await fetch('/api/card/message', {
@@ -156,6 +194,10 @@ export default function HomePage() {
     setMessageSaved(false);
     setShared(false);
     setIncludeTranscript(false);
+    if (previewUrlRef.current) {
+      URL.revokeObjectURL(previewUrlRef.current);
+      previewUrlRef.current = null;
+    }
   }, []);
 
   const formatTime = (sec: number) => {
@@ -169,7 +211,6 @@ export default function HomePage() {
       {/* ── LANDING ── */}
       {appState === 'LANDING' && (
         <div className="w-full max-w-md md:max-w-lg text-center space-y-8 fade-in">
-          {/* Logo */}
           <div className="space-y-2">
             <h1 className="text-5xl md:text-6xl font-bold tracking-tight">{t('common:app.name')}</h1>
             <p className="font-batang text-[var(--color-muted-foreground)] text-xl md:text-2xl">
@@ -177,28 +218,25 @@ export default function HomePage() {
             </p>
           </div>
 
-          {/* Description */}
           <p className="text-base md:text-lg text-[var(--color-muted-foreground)] leading-relaxed whitespace-pre-line">
             {t('common:app.description')}
           </p>
 
-          {/* Error */}
           {error && (
             <p className="text-sm text-red-500">{error}</p>
           )}
 
-          {/* Actions */}
           <div className="space-y-3">
             <button
               onClick={handleStart}
-              className="w-full py-5 rounded-2xl bg-[var(--color-accent)] text-[var(--color-accent-foreground)] font-semibold text-xl transition-transform active:scale-95"
+              className="w-full py-5 rounded-full bg-[var(--color-accent)] text-[var(--color-accent-foreground)] font-semibold text-xl transition-transform active:scale-95"
             >
               {t('common:landing.startRecording')}
             </button>
 
             <button
               onClick={() => fileInputRef.current?.click()}
-              className="w-full py-4 rounded-2xl glass text-[var(--color-foreground)] text-base transition-transform active:scale-95"
+              className="w-full py-4 rounded-full glass text-[var(--color-foreground)] text-base transition-transform active:scale-95"
             >
               {t('common:landing.uploadFile')}
             </button>
@@ -212,29 +250,33 @@ export default function HomePage() {
 
             <button
               onClick={handleDemo}
-              className="w-full py-4 rounded-2xl glass text-[var(--color-foreground)] text-base transition-transform active:scale-95"
+              className="w-full py-4 rounded-full glass text-[var(--color-foreground)] text-base transition-transform active:scale-95"
             >
               {t('common:landing.tryDemo')}
             </button>
           </div>
-
         </div>
       )}
 
       {/* ── RECORDING ── */}
       {appState === 'RECORDING' && (
         <div className="w-full max-w-md md:max-w-lg text-center space-y-8 fade-in">
-          {/* Timer */}
           <div className="space-y-2">
             <p className="text-6xl md:text-7xl font-mono font-light tabular-nums">
               {formatTime(recorder.elapsed)}
             </p>
             <p className="text-base md:text-lg text-[var(--color-muted-foreground)]">
-              {recorder.elapsed >= 55 ? t('common:recording.ending') : t('common:recording.prompt')}
+              {recorder.elapsed < MIN_DURATION
+                ? t('common:recording.minTime', { sec: MIN_DURATION })
+                : recorder.elapsed >= MAX_DURATION - 5
+                  ? t('common:recording.ending')
+                  : t('common:recording.prompt')}
+            </p>
+            <p className="text-sm text-[var(--color-muted-foreground)]/60">
+              {t('common:recording.duration', { min: MIN_DURATION, max: MAX_DURATION })}
             </p>
           </div>
 
-          {/* Waveform */}
           <div className="flex items-center justify-center gap-1 h-20">
             {recorder.waveformData.map((v, i) => (
               <div
@@ -245,28 +287,73 @@ export default function HomePage() {
             ))}
           </div>
 
-          {/* Stop Button */}
           <button
             onClick={handleStop}
-            className="mx-auto w-20 h-20 rounded-full bg-[var(--color-accent)] text-[var(--color-accent-foreground)] flex items-center justify-center recording-pulse transition-transform active:scale-90"
+            disabled={recorder.elapsed < MIN_DURATION}
+            className="mx-auto w-20 h-20 rounded-full bg-[var(--color-accent)] text-[var(--color-accent-foreground)] flex items-center justify-center recording-pulse transition-transform active:scale-90 disabled:opacity-40 disabled:recording-pulse-none"
           >
             <div className="w-7 h-7 rounded-sm bg-white" />
           </button>
 
           <p className="text-xs text-[var(--color-muted-foreground)]">
-            {t('common:recording.tapToStop')}
+            {recorder.elapsed < MIN_DURATION
+              ? t('common:recording.waitMin')
+              : t('common:recording.tapToStop')}
           </p>
         </div>
       )}
 
-      {/* ── ANALYZING — Full-screen loading overlay ── */}
+      {/* ── PREVIEW ── */}
+      {appState === 'PREVIEW' && previewUrlRef.current && (
+        <div className="w-full max-w-md md:max-w-lg text-center space-y-8 fade-in">
+          <div className="space-y-2">
+            <p className="text-2xl md:text-3xl font-bold">
+              {t('common:preview.title')}
+            </p>
+            <p className="text-base text-[var(--color-muted-foreground)]">
+              {t('common:preview.duration', { sec: recordedDuration })}
+            </p>
+          </div>
+
+          <audio
+            ref={previewAudioRef}
+            src={previewUrlRef.current}
+            controls
+            className="w-full h-12 mx-auto"
+          />
+
+          <div className="space-y-3">
+            <button
+              onClick={handlePreviewSubmit}
+              className="w-full py-5 rounded-full bg-[var(--color-accent)] text-[var(--color-accent-foreground)] font-semibold text-xl transition-transform active:scale-95"
+            >
+              {t('common:preview.submit')}
+            </button>
+
+            <button
+              onClick={handleReRecord}
+              className="w-full py-4 rounded-full glass text-[var(--color-foreground)] text-base transition-transform active:scale-95"
+            >
+              {t('common:preview.reRecord')}
+            </button>
+
+            <button
+              onClick={handleReset}
+              className="w-full py-4 rounded-full text-[var(--color-muted-foreground)] text-base transition-transform active:scale-95"
+            >
+              {t('common:preview.cancel')}
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* ── ANALYZING ── */}
       {appState === 'ANALYZING' && <AnalyzingOverlay t={t} />}
 
       {/* ── RESULT ── */}
       {appState === 'RESULT' && result && (
         <div className="w-full max-w-md md:max-w-lg fade-in">
-          <div className="glass rounded-2xl overflow-hidden">
-            {/* Image */}
+          <div className="glass rounded-3xl overflow-hidden">
             <img
               src={result.image.url}
               alt={result.coreEmotion}
@@ -274,26 +361,23 @@ export default function HomePage() {
             />
 
             <div className="p-6 space-y-5">
-              {/* Core Emotion */}
               <div className="text-center">
                 <span className="emotion-tag text-lg">
                   #{result.coreEmotion}
                 </span>
               </div>
 
-              {/* Summary */}
               <p className="font-batang text-center text-xl md:text-2xl leading-relaxed text-[var(--color-foreground)]">
                 &ldquo;{result.summary}&rdquo;
               </p>
 
-              {/* Personal Message */}
               {result.cardId !== 'demo' && (
                 <div className="space-y-3">
                   <textarea
                     value={personalMessage}
                     onChange={(e) => setPersonalMessage(e.target.value)}
                     placeholder={t('common:result.messagePlaceholder')}
-                    className="w-full p-4 rounded-xl bg-[var(--color-muted)] text-[var(--color-foreground)] placeholder:text-[var(--color-muted-foreground)] text-base resize-none border border-[var(--color-border)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]"
+                    className="w-full p-4 rounded-3xl bg-[var(--color-muted)] text-[var(--color-foreground)] placeholder:text-[var(--color-muted-foreground)] text-base resize-none border border-[var(--color-border)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]"
                     rows={2}
                     maxLength={200}
                     disabled={messageSaved}
@@ -301,7 +385,7 @@ export default function HomePage() {
                   {personalMessage.trim() && !messageSaved && (
                     <button
                       onClick={handleSaveMessage}
-                      className="w-full py-3 rounded-xl bg-[var(--color-secondary)] text-[var(--color-secondary-foreground)] text-base transition-transform active:scale-95"
+                      className="w-full py-3 rounded-full bg-[var(--color-secondary)] text-[var(--color-secondary-foreground)] text-base transition-transform active:scale-95"
                     >
                       {t('common:result.saveMessage')}
                     </button>
@@ -312,9 +396,8 @@ export default function HomePage() {
                 </div>
               )}
 
-              {/* Include transcript toggle */}
               {result.cardId !== 'demo' && result.textContent.transcript && (
-                <label className="flex items-center gap-3 rounded-xl p-4 bg-[var(--color-muted)]/50 cursor-pointer">
+                <label className="flex items-center gap-3 rounded-3xl p-4 bg-[var(--color-muted)]/50 cursor-pointer">
                   <input
                     type="checkbox"
                     checked={includeTranscript}
@@ -328,12 +411,11 @@ export default function HomePage() {
                 </label>
               )}
 
-              {/* Share */}
               <div className="space-y-3 pt-1">
                 {result.cardId !== 'demo' && (
                   <button
                     onClick={handleShare}
-                    className="w-full py-5 rounded-2xl bg-[var(--color-accent)] text-[var(--color-accent-foreground)] font-semibold text-lg transition-transform active:scale-95"
+                    className="w-full py-5 rounded-full bg-[var(--color-accent)] text-[var(--color-accent-foreground)] font-semibold text-lg transition-transform active:scale-95"
                   >
                     {shared ? t('common:result.shared') : t('common:result.share')}
                   </button>
@@ -341,7 +423,7 @@ export default function HomePage() {
 
                 <button
                   onClick={handleReset}
-                  className="w-full py-4 rounded-2xl text-[var(--color-muted-foreground)] text-base transition-transform active:scale-95"
+                  className="w-full py-4 rounded-full text-[var(--color-muted-foreground)] text-base transition-transform active:scale-95"
                 >
                   {t('common:result.recordAgain')}
                 </button>
@@ -356,13 +438,12 @@ export default function HomePage() {
 
 /* ── Analyzing Overlay ── */
 
-const STEP_INTERVALS = [0, 5000, 12000, 20000]; // ms thresholds for each step
+const STEP_INTERVALS = [0, 5000, 12000, 20000];
 
 function AnalyzingOverlay({ t }: { t: (key: string) => string }) {
   const [step, setStep] = useState(0);
   const [dots, setDots] = useState('');
 
-  // Progress through steps based on elapsed time
   useEffect(() => {
     const timers = STEP_INTERVALS.slice(1).map((ms, i) =>
       setTimeout(() => setStep(i + 1), ms)
@@ -370,7 +451,6 @@ function AnalyzingOverlay({ t }: { t: (key: string) => string }) {
     return () => timers.forEach(clearTimeout);
   }, []);
 
-  // Animated dots
   useEffect(() => {
     const interval = setInterval(() => {
       setDots(prev => prev.length >= 3 ? '' : prev + '.');
@@ -395,12 +475,10 @@ function AnalyzingOverlay({ t }: { t: (key: string) => string }) {
   return (
     <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[var(--color-background)]/95 backdrop-blur-sm px-6">
       <div className="w-full max-w-xs md:max-w-sm text-center space-y-8 fade-in">
-        {/* Breathing icon */}
         <div className="breathe flex justify-center" key={step}>
           {icons[step]}
         </div>
 
-        {/* Step message */}
         <div className="space-y-3">
           <p className="font-batang text-2xl md:text-3xl float-up" key={`msg-${step}`}>
             {t(stepKeys[step])}{dots}
@@ -410,7 +488,6 @@ function AnalyzingOverlay({ t }: { t: (key: string) => string }) {
           </p>
         </div>
 
-        {/* Step dots indicator */}
         <div className="flex items-center justify-center gap-3">
           {stepKeys.map((_, i) => (
             <div
@@ -424,9 +501,8 @@ function AnalyzingOverlay({ t }: { t: (key: string) => string }) {
           ))}
         </div>
 
-        {/* Shimmer skeleton — looks like incoming result */}
         <div className="space-y-4 pt-4">
-          <div className="aspect-[4/3] rounded-2xl shimmer mx-auto" />
+          <div className="aspect-[4/3] rounded-3xl shimmer mx-auto" />
           <div className="h-5 rounded-full shimmer w-1/3 mx-auto" />
           <div className="h-4 rounded-full shimmer w-2/3 mx-auto" />
         </div>

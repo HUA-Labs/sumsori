@@ -8,23 +8,25 @@
 
 /* ── Sumsori Paper Theme — @theme으로 TW4 기본값 오버라이드 ── */
 @theme {
-  --color-primary: #71D9FF;
-  --color-primary-foreground: #280000;
+  --color-primary: #2EC4C4;
+  --color-primary-foreground: #FFFFFF;
   --color-background: #FDF6EA;
-  --color-foreground: #280000;
+  --color-foreground: #3D2B1F;
   --color-card: #FDF6EA;
-  --color-card-foreground: #280000;
+  --color-card-foreground: #3D2B1F;
   --color-popover: #FDF6EA;
-  --color-popover-foreground: #280000;
-  --color-border: #E8C4B8;
-  --color-input: #E8C4B8;
-  --color-ring: #71D9FF;
-  --color-muted: #FFF5F0;
-  --color-muted-foreground: #5C3D2E;
-  --color-accent: #E8643E;
+  --color-popover-foreground: #3D2B1F;
+  --color-border: #E8D5C4;
+  --color-input: #E8D5C4;
+  --color-ring: #2EC4C4;
+  --color-muted: #F5EDE0;
+  --color-muted-foreground: #7A6352;
+  --color-accent: #2EC4C4;
   --color-accent-foreground: #FFFFFF;
-  --color-secondary: #FFF0E8;
-  --color-secondary-foreground: #280000;
+  --color-secondary: #F0E6D8;
+  --color-secondary-foreground: #3D2B1F;
+  --color-nav: #C49470;
+  --color-nav-foreground: #FFFFFF;
 }
 
 :root {
@@ -36,30 +38,51 @@
 }
 
 .dark {
-  /* Paper Dark — 밤하늘 보라 */
-  --color-primary: #7B68A8;
-  --color-primary-foreground: #F1E9FF;
-  --color-background: #1A1B2E;
-  --color-foreground: #E8E0F5;
-  --color-card: #242538;
-  --color-card-foreground: #E8E0F5;
-  --color-popover: #242538;
-  --color-popover-foreground: #E8E0F5;
-  --color-border: #3D3E56;
-  --color-input: #3D3E56;
-  --color-ring: #7B68A8;
-  --color-muted: #2E2F44;
-  --color-muted-foreground: #A89DC0;
-  --color-accent: #8B5CF6;
-  --color-accent-foreground: #FFFFFF;
-  --color-secondary: #2E2F44;
-  --color-secondary-foreground: #E8E0F5;
+  /* Paper Dark — 초콜릿 브라운 */
+  --color-primary: #3DD8D8;
+  --color-primary-foreground: #FFFFFF;
+  --color-background: #2A1810;
+  --color-foreground: #F5E6D8;
+  --color-card: #3A2418;
+  --color-card-foreground: #F5E6D8;
+  --color-popover: #3A2418;
+  --color-popover-foreground: #F5E6D8;
+  --color-border: #5A4030;
+  --color-input: #5A4030;
+  --color-ring: #3DD8D8;
+  --color-muted: #3A2418;
+  --color-muted-foreground: #C4A88E;
+  --color-accent: #3DD8D8;
+  --color-accent-foreground: #2A1810;
+  --color-secondary: #4A3020;
+  --color-secondary-foreground: #F5E6D8;
+  --color-nav: #8B6B50;
+  --color-nav-foreground: #F5E6D8;
 
   --progress-track: rgb(55, 65, 81);
   --progress-success: rgb(74, 222, 128);
   --progress-warning: rgb(250, 204, 21);
   --progress-error: rgb(248, 113, 113);
   --progress-info: rgb(129, 140, 248);
+}
+
+/* ── Lora 폰트 (영문 세리프 - Paper Theme) ── */
+@font-face {
+  font-family: 'Lora';
+  src: url('/fonts/Lora-Regular-Subset.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Lora';
+  src: url('/fonts/Lora-Bold-Subset.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 html {
@@ -74,15 +97,15 @@ html {
 body {
   background: var(--color-background);
   color: var(--color-foreground);
-  font-family: "Pretendard Variable", "Pretendard", system-ui, -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  font-family: "Gowun Batang", "Lora", "Pretendard Variable", "Pretendard", serif;
   word-break: keep-all;
   overflow-wrap: break-word;
   -webkit-text-size-adjust: 100%;
 }
 
-/* ── 고운바탕 — 감성 텍스트용 ── */
+/* ── 고운바탕 + Lora — 감성 텍스트용 ── */
 .font-batang {
-  font-family: "Gowun Batang", serif;
+  font-family: "Gowun Batang", "Lora", serif;
 }
 
 /* ── Flat card ── */
@@ -147,9 +170,9 @@ body {
   align-items: center;
   padding: 6px 18px;
   border-radius: 9999px;
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 600;
-  font-family: "Gowun Batang", serif;
+  font-family: "Gowun Batang", "Lora", serif;
   background: color-mix(in srgb, var(--color-accent) 15%, var(--color-background));
   color: var(--color-foreground);
   border: 1px solid color-mix(in srgb, var(--color-accent) 30%, transparent);
@@ -161,7 +184,7 @@ body {
   100% { background-position: 200% center; }
 }
 .shimmer {
-  background: linear-gradient(90deg, transparent 25%, color-mix(in srgb, var(--color-primary) 10%, transparent) 50%, transparent 75%);
+  background: linear-gradient(90deg, transparent 25%, color-mix(in srgb, var(--color-foreground) 6%, transparent) 50%, transparent 75%);
   background-size: 200% 100%;
   animation: shimmer 2s ease-in-out infinite;
 }

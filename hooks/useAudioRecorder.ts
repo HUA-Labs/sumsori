@@ -13,7 +13,8 @@ interface UseAudioRecorderReturn {
   audioBlob: Blob | null;
 }
 
-const MAX_DURATION = 60; // 60 seconds
+const MAX_DURATION = 30; // 30 seconds
+const MIN_DURATION = 2; // 2 seconds minimum
 
 export function useAudioRecorder(): UseAudioRecorderReturn {
   const [state, setState] = useState<RecorderState>('idle');

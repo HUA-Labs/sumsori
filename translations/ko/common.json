@@ -2,7 +2,7 @@
   "app": {
     "name": "숨소리",
     "tagline": "말하지 못한 마음을 그림으로",
-    "description": "1분만 말하면, 목소리가 그림이 됩니다.\n말로 전하지 못한 마음을 그림으로 보내세요.",
+    "description": "짧게 말하면, 목소리가 그림이 돼요.\n말로 전하지 못한 마음을 그림으로 보내세요.",
     "footer": "숨소리 — 말하지 못한 마음을 그림으로",
     "voiceBecamePicture": "목소리가 그림이 되었어요."
   },
@@ -13,11 +13,21 @@
   },
   "recording": {
     "prompt": "지금 하고 싶은 말을 해보세요",
-    "ending": "곧 종료됩니다...",
-    "tapToStop": "탭하여 녹음 중지"
+    "ending": "곧 종료돼요",
+    "tapToStop": "탭하여 녹음 중지",
+    "minTime": "최소 {{sec}}초 이상 녹음해주세요",
+    "waitMin": "조금만 더 말해주세요",
+    "duration": "{{min}}~{{max}}초"
+  },
+  "preview": {
+    "title": "녹음을 확인해보세요",
+    "duration": "{{sec}}초 녹음됨",
+    "submit": "마음 전하기",
+    "reRecord": "다시 녹음하기",
+    "cancel": "처음으로"
   },
   "analyzing": {
-    "listening": "당신의 목소리를 듣고 있어요...",
+    "listening": "목소리를 듣고 있어요",
     "processing": "마음을 읽고 그림을 그리는 중이에요",
     "step1": "목소리를 듣고 있어요",
     "step2": "마음을 읽는 중이에요",
@@ -52,7 +62,7 @@
   },
   "nav": {
     "record": "녹음",
-    "text": "텍스트",
+    "text": "전하기",
     "myCards": "내 숨소리",
     "profile": "프로필"
   },
@@ -62,20 +72,21 @@
     "logout": "로그아웃"
   },
   "textMode": {
-    "title": "마음을 글로 전하세요",
-    "placeholder": "지금 하고 싶은 말을 적어보세요...",
+    "title": "전하기",
+    "subtitle": "하고 싶은 말, 대신 전해드릴게요",
+    "placeholder": "전하고 싶은 말을 적어보세요",
     "voiceSelect": "목소리 선택",
     "voiceFemaleWarm": "여성 · 따뜻한",
     "voiceFemaleFirm": "여성 · 단단한",
     "voiceMaleUpbeat": "남성 · 밝은",
     "voiceMaleCalm": "남성 · 차분한",
-    "analyze": "마음 읽기",
+    "analyze": "마음 전하기",
     "surfaceEmotion": "겉으로 한 말",
     "hiddenEmotion": "속마음",
     "playVoice": "음성으로 듣기",
     "writeAgain": "다시 작성하기",
-    "analyzingStep1": "글을 읽고 있어요",
-    "analyzingStep2": "숨겨진 마음을 찾는 중이에요",
+    "analyzingStep1": "하고 싶은 말을 읽고 있어요",
+    "analyzingStep2": "진짜 마음을 찾는 중이에요",
     "analyzingStep3": "그림을 그리고 있어요",
     "analyzingStep4": "거의 다 됐어요!"
   },
