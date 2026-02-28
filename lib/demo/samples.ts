@@ -191,34 +191,34 @@ export const DEMO_BUNDLES_EN: DemoBundle[] = [
   {
     analysis: {
       "voiceTone": {
-        "emotion": "strained",
-        "energy": 70,
+        "emotion": "melancholy",
+        "energy": 40,
         "pace": "normal",
-        "stability": 60,
-        "details": "The voice is slightly higher pitched with an almost forced cheerfulness and an underlying tension, particularly when emphasizing 'great'. There's a defensive quality in the delivery, lacking genuine relaxation."
+        "stability": 50,
+        "details": "The voice attempts a higher, light pitch, but frequent, slightly elongated pauses and subtle, almost sighing breaths undermine the cheerful facade. Intonation often rises at the end of phrases, creating a forced, questioning cheerfulness."
       },
       "textContent": {
-        "emotion": "asserted self-sufficiency",
-        "themes": ["independence", "routine", "denial of need"],
-        "keywords": ["fine", "honestly", "needs", "come home to", "coffee", "playlist", "routines", "great"],
+        "emotion": "contentment",
+        "themes": ["self-sufficiency", "denial of loneliness", "routine"],
+        "keywords": ["fine", "honestly", "needs someone", "coffee", "playlist", "routines", "great"],
         "sentiment": 0.8,
-        "transcript": "Oh, it's totally fine. Honestly. I mean, who needs someone to come home to, right? I've got my coffee and my playlist and my little routines. It's great actually. I'm doing really great. Yeah, really great."
+        "transcript": "Oh, it's totally fine, honestly. I mean, who needs someone to come home to, right? I've got my coffee and my playlist and my little routines. It's great actually. I'm doing really great. Yeah, really great."
       },
       "concordance": {
         "match": "low",
-        "explanation": "The explicitly positive and self-sufficient words are contradicted by a voice tone that sounds tense, forced, and subtly defensive, indicating a deeper emotional state than what is being expressed."
+        "explanation": "The speaker's words express strong self-sufficiency and contentment, but the strained, slightly high-pitched tone, audible pauses, and subtle sighs suggest an underlying sense of loneliness or unconvincing reassurance."
       },
-      "coreEmotion": "yearning",
-      "summary": "A forced cheerfulness attempts to mask a deep, unacknowledged longing for connection, betrayed by the subtle tension in the voice.",
+      "coreEmotion": "wistfulness",
+      "summary": "A quiet voice attempts to project contentment and independence, yet a fragile undercurrent of longing and self-reassurance betrays a heart that yearns for connection.",
       "imagePrompt": {
         "format": "SQUARE 1:1, fills entire canvas edge to edge, NO margins/borders/vignette",
-        "character": "one small, round, simple white cat",
-        "angle": "THREE-QUARTER BACK VIEW only (hint of one eye OK, never fully front-facing)",
+        "character": "one small, round, simple white cat (NOT human-like, NOT realistic cat)",
+        "angle": "BEHIND or THREE-QUARTER BACK VIEW only (hint of one eye OK, never fully front-facing)",
         "style": "oil pastel and crayon on thick textured paper. Visible rough strokes and paper grain. NO black outlines — shapes defined by color contrast only. Edges soft and rough like real crayon. Simple, minimal, children's picture book. NOT photorealistic, NOT 3D, NOT anime, NOT smooth digital",
-        "scene": "train platform alone",
+        "scene": "beach shore at sunset",
         "catPose": "sitting still looking away",
         "colorPalette": "warm peach/amber/gold",
-        "lighting": "single streetlamp glow",
+        "lighting": "twilight gradient sky",
         "forbidden": "NO text, NO words, NO letters, NO human faces, NO other animals"
       }
     },
@@ -227,38 +227,146 @@ export const DEMO_BUNDLES_EN: DemoBundle[] = [
   {
     analysis: {
       "voiceTone": {
-        "emotion": "subdued",
-        "energy": 30,
+        "emotion": "dejection",
+        "energy": 25,
         "pace": "slow",
-        "stability": 85,
-        "details": "The voice maintains a low-to-mid pitch range with minimal inflection, creating a somewhat flat and monotonous delivery. Pauses are natural, but the overall slow pace and lack of vocal energy contribute to a weary, detached feel."
+        "stability": 60,
+        "details": "The voice is low-pitched and delivered slowly, with noticeable pauses before key phrases. There's a slight tremor in the voice, particularly towards the end, indicating emotional strain. Breathing is audible and somewhat shallow, contributing to an overall somber and heavy quality."
       },
       "textContent": {
-        "emotion": "disappointment",
-        "themes": ["unrequited effort", "personal loss", "acceptance of reality", "betrayal"],
-        "keywords": ["everything you have", "not enough", "walk away", "mattered", "that's life"],
+        "emotion": "regret",
+        "themes": ["memory", "loss", "inaction", "lingering regret"],
+        "keywords": ["thinking", "last morning", "door", "bag", "wanted to say", "stood there", "hear it closing"],
         "sentiment": -0.8,
-        "transcript": "I just think it's interesting, you know, how you can give everything you have to someone, every single day for years, and they just, decide it wasn't enough. They just walk away like none of it mattered. But hey, that's life I guess."
+        "transcript": "I keep thinking about that last morning. She was standing by the door with her bag, and I wanted to say something, anything, but I just stood there. And now every time I pass that door, I still hear it closing."
       },
       "concordance": {
         "match": "high",
-        "explanation": "The subdued and weary voice tone perfectly aligns with the text's narrative of giving profoundly and experiencing unappreciated loss, concluding with a resigned acceptance."
+        "explanation": "The slow, heavy, and slightly trembling voice perfectly aligns with the somber and regretful nature of the words, conveying a deep, lingering sadness."
+      },
+      "coreEmotion": "dejection",
+      "summary": "A quiet, lonely sadness permeates the voice, reflecting a persistent regret over unspoken words and the haunting memory of a departure.",
+      "imagePrompt": {
+        "format": "SQUARE 1:1, fills entire canvas edge to edge, NO margins/borders/vignette",
+        "character": "one small, round, simple white cat (NOT human-like, NOT realistic cat)",
+        "angle": "BEHIND or THREE-QUARTER BACK VIEW only (hint of one eye OK, never fully front-facing)",
+        "style": "oil pastel and crayon on thick textured paper. Visible rough strokes and paper grain. NO black outlines — shapes defined by color contrast only. Edges soft and rough like real crayon. Simple, minimal, children's picture book. NOT photorealistic, NOT 3D, NOT anime, NOT smooth digital",
+        "scene": "train platform alone",
+        "catPose": "sitting still looking away",
+        "colorPalette": "cool blues/lavender",
+        "lighting": "single streetlamp glow",
+        "forbidden": "NO text, NO words, NO letters, NO human faces, NO other animals"
+      }
+    },
+    imageUrl: '/demo/sample-en-02.png',
+  },
+  {
+    analysis: {
+      "voiceTone": {
+        "emotion": "sarcastic weariness",
+        "energy": 30,
+        "pace": "normal",
+        "stability": 70,
+        "details": "Flat, low pitch with little variation, bordering on monotone. Features subtle exhalations that sound like weary sighs. Deliberate pauses emphasize a lack of enthusiasm and an underlying dismissiveness. The repeated 'fine' sounds insincere."
+      },
+      "textContent": {
+        "emotion": "passive acceptance",
+        "themes": ["denial", "permission", "repetition", "resignation"],
+        "keywords": ["mad", "fine", "completely", "always do", "want"],
+        "sentiment": 0.1,
+        "transcript": "No, no, no. I'm not mad. Why would I be mad? It's fine. It's completely fine. You do what you want. You always do. It's totally, completely, absolutely fine with me. Yep, fine."
+      },
+      "concordance": {
+        "match": "low",
+        "explanation": "The weary, flat, and subtly sarcastic voice tone directly contradicts the explicit words stating everything is 'fine' and the speaker is 'not mad', suggesting true feelings are being suppressed or masked."
       },
       "coreEmotion": "resignation",
-      "summary": "A quiet voice recounts the bittersweet pain of unacknowledged effort and ultimately accepts the harsh simplicity of life's unpredictable turns.",
+      "summary": "A tired voice, masking deep-seated weariness, passively accepts a familiar defeat.",
       "imagePrompt": {
         "format": "SQUARE 1:1, fills entire canvas edge to edge, NO margins/borders/vignette",
         "character": "one small, round, simple white cat (NOT human-like, NOT realistic cat)",
         "angle": "THREE-QUARTER BACK VIEW only (hint of one eye OK, never fully front-facing)",
         "style": "oil pastel and crayon on thick textured paper. Visible rough strokes and paper grain. NO black outlines — shapes defined by color contrast only. Edges soft and rough like real crayon. Simple, minimal, children's picture book. NOT photorealistic, NOT 3D, NOT anime, NOT smooth digital",
-        "scene": "bridge over quiet river",
+        "scene": "train platform alone",
         "catPose": "lying flat",
         "colorPalette": "muted grays/beige",
         "lighting": "diffused overcast",
         "forbidden": "NO text, NO words, NO letters, NO human faces, NO other animals"
       }
     },
-    imageUrl: '/demo/sample-en-02.png',
+    imageUrl: '/demo/sample-en-03.png',
+  },
+  {
+    analysis: {
+      "voiceTone": {
+        "emotion": "reflective sincerity",
+        "energy": 45,
+        "pace": "normal",
+        "stability": 90,
+        "details": "The speaker's voice is calm and measured, with deliberate pacing and well-placed pauses, particularly before key phrases like 'I finally get it now' and 'I get it. Thank you.' This gives the impression of thoughtful reflection rather than hurried speech. Pitch is stable, and volume is consistent, conveying a sense of genuine conviction."
+      },
+      "textContent": {
+        "emotion": "appreciation",
+        "themes": ["parental wisdom", "maturation", "gratitude"],
+        "keywords": ["Dad", "get it", "Saturday mornings", "saving money", "own kid", "Thank you"],
+        "sentiment": 0.9,
+        "transcript": "You know what, Dad? I finally get it now. All those Saturday mornings you dragged me to the park. All those boring talks about saving money. I thought you were just being annoying, but now that I have my own kid, I get it. Thank you."
+      },
+      "concordance": {
+        "match": "high",
+        "explanation": "The voice tone's reflective sincerity perfectly aligns with the text's message of newfound understanding and heartfelt gratitude."
+      },
+      "coreEmotion": "gratitude",
+      "summary": "A profound realization gently dawns upon the speaker, transforming past annoyance into deep, heartfelt appreciation for a father's enduring wisdom.",
+      "imagePrompt": {
+        "format": "SQUARE 1:1, fills entire canvas edge to edge, NO margins/borders/vignette",
+        "character": "one small, round, simple white cat (NOT human-like, NOT realistic cat)",
+        "angle": "THREE-QUARTER BACK VIEW only (hint of one eye OK, never fully front-facing)",
+        "style": "oil pastel and crayon on thick textured paper. Visible rough strokes and paper grain. NO black outlines — shapes defined by color contrast only. Edges soft and rough like real crayon. Simple, minimal, children's picture book. NOT photorealistic, NOT 3D, NOT anime, NOT smooth digital",
+        "scene": "beach shore at sunset",
+        "catPose": "looking up at sky",
+        "colorPalette": "warm peach/amber/gold",
+        "lighting": "twilight gradient sky",
+        "forbidden": "NO text, NO words, NO letters, NO human faces, NO other animals"
+      }
+    },
+    imageUrl: '/demo/sample-en-04.png',
+  },
+  {
+    analysis: {
+      "voiceTone": {
+        "emotion": "tenderness",
+        "energy": 55,
+        "pace": "normal",
+        "stability": 90,
+        "details": "The voice is stable and calm, with a slightly lower pitch that conveys sincerity. There are natural pauses, indicating thoughtful delivery, and no noticeable breathiness or tremor, lending an air of gentle warmth."
+      },
+      "textContent": {
+        "emotion": "gratitude",
+        "themes": ["friendship", "nostalgia", "appreciation", "enduring relationships", "emotional support"],
+        "keywords": ["college", "laughing", "everything", "messy", "good", "person"],
+        "sentiment": 0.9,
+        "transcript": "I was cleaning out my phone yesterday and found this video of us from college. We were just laughing about nothing in the parking lot at like 2:00 a.m. and I realized, you're the only person who's been there through everything, the messy stuff, the good stuff, all of it. I don't say it enough, but you're my person."
+      },
+      "concordance": {
+        "match": "high",
+        "explanation": "The gentle, warm, and sincere voice tone perfectly aligns with the heartfelt message of deep appreciation and an enduring bond expressed in the words."
+      },
+      "coreEmotion": "tenderness",
+      "summary": "A soft and genuine voice delivers a profound affirmation of a cherished friendship, steeped in nostalgic warmth and deep affection.",
+      "imagePrompt": {
+        "format": "SQUARE 1:1, fills entire canvas edge to edge, NO margins/borders/vignette",
+        "character": "one small, round, simple white cat (NOT human-like, NOT realistic cat)",
+        "angle": "THREE-QUARTER BACK VIEW only (hint of one eye OK, never fully front-facing)",
+        "style": "oil pastel and crayon on thick textured paper. Visible rough strokes and paper grain. NO black outlines — shapes defined by color contrast only. Edges soft and rough like real crayon. Simple, minimal, children's picture book. NOT photorealistic, NOT 3D, NOT anime, NOT smooth digital",
+        "scene": "bridge over quiet river",
+        "catPose": "sitting still looking away",
+        "colorPalette": "soft coral/pink",
+        "lighting": "twilight gradient sky",
+        "forbidden": "NO text, NO words, NO letters, NO human faces, NO other animals"
+      }
+    },
+    imageUrl: '/demo/sample-en-05.png',
   },
 ];
 

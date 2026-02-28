@@ -190,7 +190,7 @@ export default function HomePage() {
           <div className="space-y-3">
             <button
               onClick={handleStart}
-              className="w-full py-4 rounded-2xl bg-[var(--color-accent)] text-white font-semibold text-lg transition-transform active:scale-95 shadow-lg"
+              className="w-full py-4 rounded-2xl bg-[var(--color-accent)] text-[var(--color-accent-foreground)] font-semibold text-lg transition-transform active:scale-95 shadow-lg"
             >
               {t('common:landing.startRecording')}
             </button>
@@ -247,7 +247,7 @@ export default function HomePage() {
           {/* Stop Button */}
           <button
             onClick={handleStop}
-            className="mx-auto w-20 h-20 rounded-full bg-[var(--color-accent)] text-white flex items-center justify-center recording-pulse shadow-lg transition-transform active:scale-90"
+            className="mx-auto w-20 h-20 rounded-full bg-[var(--color-accent)] text-[var(--color-accent-foreground)] flex items-center justify-center recording-pulse shadow-lg transition-transform active:scale-90"
           >
             <div className="w-7 h-7 rounded-sm bg-white" />
           </button>
@@ -359,7 +359,7 @@ export default function HomePage() {
             {result.cardId !== 'demo' && (
               <button
                 onClick={handleShare}
-                className="w-full py-4 rounded-2xl bg-[var(--color-accent)] text-white font-semibold text-base transition-transform active:scale-95 shadow-lg"
+                className="w-full py-4 rounded-2xl bg-[var(--color-accent)] text-[var(--color-accent-foreground)] font-semibold text-base transition-transform active:scale-95 shadow-lg"
               >
                 {shared ? t('common:result.shared') : t('common:result.share')}
               </button>

@@ -49,7 +49,7 @@ export default function MyPage() {
         <p className="text-[var(--color-muted-foreground)]">{t('common:my.loginRequired')}</p>
         <button
           onClick={() => setLoginOpen(true)}
-          className="py-3 px-6 rounded-2xl bg-[var(--color-accent)] text-white text-sm font-medium transition-transform active:scale-95"
+          className="py-3 px-6 rounded-2xl bg-[var(--color-accent)] text-[var(--color-accent-foreground)] text-sm font-medium transition-transform active:scale-95"
         >
           {t('common:my.login')}
         </button>
@@ -83,7 +83,7 @@ export default function MyPage() {
             </p>
             <Link
               href="/"
-              className="inline-block py-3 px-6 rounded-2xl bg-[var(--color-accent)] text-white text-sm font-medium"
+              className="inline-block py-3 px-6 rounded-2xl bg-[var(--color-accent)] text-[var(--color-accent-foreground)] text-sm font-medium"
             >
               {t('common:my.firstRecording')}
             </Link>

@@ -37,16 +37,30 @@ const scenarios: DemoScenario[] = [
   {
     num: 'en-01',
     voice: 'Samantha',
-    rate: 180, // fast, upbeat
+    rate: 170,
     text: `Oh it's totally fine, honestly! I mean, who needs someone to come home to, right? I've got my coffee and my playlist and my little routines. It's great actually. I'm doing really great. Yeah. Really great.`,
-    description: 'Cheerful/upbeat voice, lonely/sad content → LOW concordance',
+    description: 'Cheerful voice, lonely content → LOW concordance',
   },
   {
     num: 'en-02',
     voice: 'Daniel',
-    rate: 120, // slow, calm
-    text: `I just think it's interesting, you know, how you can give everything you have to someone, every single day for years, and they just... decide it wasn't enough. They just walk away like none of it mattered. But hey, that's life I guess.`,
-    description: 'Calm/flat voice, resentful/angry content → LOW concordance',
+    rate: 110,
+    text: `I keep thinking about that last morning. She was standing by the door with her bag, and I wanted to say something, anything. But I just stood there. And now every time I pass that door, I still hear it closing.`,
+    description: 'Slow, heavy voice, regret/loss content → HIGH concordance',
+  },
+  {
+    num: 'en-03',
+    voice: 'Samantha',
+    rate: 200,
+    text: `No no no, I'm not mad! Why would I be mad? It's fine, it's completely fine. You do what you want. You always do. It's totally, completely, absolutely fine with me. Yep. Fine.`,
+    description: 'Fast, high-pitched voice, passive-aggressive content → LOW concordance',
+  },
+  {
+    num: 'en-04',
+    voice: 'Daniel',
+    rate: 130,
+    text: `You know what, Dad? I finally get it now. All those Saturday mornings you dragged me to the park, all those boring talks about saving money. I thought you were just being annoying. But now that I have my own kid... I get it. Thank you.`,
+    description: 'Warm, steady voice, gratitude/realization content → HIGH concordance',
   },
 ];
 

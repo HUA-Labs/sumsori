@@ -1,0 +1,44 @@
+{
+  "voiceTone": {
+    "emotion": "Sarcastic weariness",
+    "energy": 30,
+    "pace": "normal",
+    "stability": 70,
+    "details": "Flat, low pitch with little variation, bordering on monotone. Features subtle exhalations that sound like weary sighs. Deliberate pauses emphasize a lack of enthusiasm and an underlying dismissiveness. The repeated 'fine' sounds insincere."
+  },
+  "textContent": {
+    "emotion": "Passive acceptance",
+    "themes": [
+      "denial",
+      "permission",
+      "repetition",
+      "resignation"
+    ],
+    "keywords": [
+      "mad",
+      "fine",
+      "completely",
+      "always do",
+      "want"
+    ],
+    "sentiment": 0.1,
+    "transcript": "No, no, no. I'm not mad. Why would I be mad? It's fine. It's completely fine. You do what you want. You always do. It's totally, completely, absolutely fine with me. Yep, fine."
+  },
+  "concordance": {
+    "match": "low",
+    "explanation": "The weary, flat, and subtly sarcastic voice tone directly contradicts the explicit words stating everything is 'fine' and the speaker is 'not mad', suggesting true feelings are being suppressed or masked."
+  },
+  "coreEmotion": "resignation",
+  "summary": "A tired voice, masking deep-seated weariness, passively accepts a familiar defeat.",
+  "imagePrompt": {
+    "format": "SQUARE 1:1, fills entire canvas edge to edge, NO margins/borders/vignette",
+    "character": "one small, round, simple white cat (NOT human-like, NOT realistic cat)",
+    "angle": "THREE-QUARTER BACK VIEW only (hint of one eye OK, never fully front-facing)",
+    "style": "oil pastel and crayon on thick textured paper. Visible rough strokes and paper grain. NO black outlines — shapes defined by color contrast only. Edges soft and rough like real crayon. Simple, minimal, children's picture book. NOT photorealistic, NOT 3D, NOT anime, NOT smooth digital",
+    "scene": "train platform alone",
+    "catPose": "lying flat",
+    "colorPalette": "muted grays/beige",
+    "lighting": "diffused overcast",
+    "forbidden": "NO text, NO words, NO letters, NO human faces, NO other animals"
+  }
+}

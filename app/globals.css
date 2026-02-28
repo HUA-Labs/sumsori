@@ -16,13 +16,13 @@
   --color-card-foreground: #280000;
   --color-popover: #FDF6EA;
   --color-popover-foreground: #280000;
-  --color-border: #F5D5C8;
-  --color-input: #F5D5C8;
+  --color-border: #E8C4B8;
+  --color-input: #E8C4B8;
   --color-ring: #71D9FF;
   --color-muted: #FFF5F0;
   --color-muted-foreground: #5C3D2E;
-  --color-accent: #FF9176;
-  --color-accent-foreground: #C4532E;
+  --color-accent: #E8643E;
+  --color-accent-foreground: #FFFFFF;
   --color-secondary: #FFF0E8;
   --color-secondary-foreground: #280000;
 }
@@ -36,24 +36,24 @@
 }
 
 .dark {
-  /* Paper Dark */
-  --color-primary: #594A7C;
+  /* Paper Dark — 밤하늘 보라 */
+  --color-primary: #7B68A8;
   --color-primary-foreground: #F1E9FF;
-  --color-background: #232433;
-  --color-foreground: #F1E9FF;
-  --color-card: #2A2B3D;
-  --color-card-foreground: #F1E9FF;
-  --color-popover: #2A2B3D;
-  --color-popover-foreground: #F1E9FF;
-  --color-border: #3D3E52;
-  --color-input: #3D3E52;
-  --color-ring: #594A7C;
-  --color-muted: #383952;
-  --color-muted-foreground: #B8AFCC;
-  --color-accent: #6630E6;
-  --color-accent-foreground: #F1E9FF;
-  --color-secondary: #383952;
-  --color-secondary-foreground: #F1E9FF;
+  --color-background: #1A1B2E;
+  --color-foreground: #E8E0F5;
+  --color-card: #242538;
+  --color-card-foreground: #E8E0F5;
+  --color-popover: #242538;
+  --color-popover-foreground: #E8E0F5;
+  --color-border: #3D3E56;
+  --color-input: #3D3E56;
+  --color-ring: #7B68A8;
+  --color-muted: #2E2F44;
+  --color-muted-foreground: #A89DC0;
+  --color-accent: #8B5CF6;
+  --color-accent-foreground: #FFFFFF;
+  --color-secondary: #2E2F44;
+  --color-secondary-foreground: #E8E0F5;
 
   --progress-track: rgb(55, 65, 81);
   --progress-success: rgb(74, 222, 128);
@@ -79,9 +79,14 @@ body {
 
 /* ── Glassmorphism card ── */
 .glass {
-  background: color-mix(in srgb, var(--color-card) 50%, transparent);
+  background: color-mix(in srgb, var(--color-card) 75%, transparent);
   backdrop-filter: blur(20px) saturate(1.4);
   -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border: 1px solid color-mix(in srgb, var(--color-border) 60%, transparent);
+}
+
+.dark .glass {
+  background: color-mix(in srgb, var(--color-card) 60%, transparent);
   border: 1px solid color-mix(in srgb, var(--color-border) 40%, transparent);
 }
 
@@ -137,9 +142,10 @@ body {
   padding: 4px 14px;
   border-radius: 9999px;
   font-size: 0.875rem;
-  font-weight: 500;
-  background: color-mix(in srgb, var(--color-accent) 15%, transparent);
-  color: var(--color-accent-foreground);
+  font-weight: 600;
+  font-family: "Gowun Batang", serif;
+  background: color-mix(in srgb, var(--color-accent) 15%, var(--color-background));
+  color: var(--color-foreground);
   border: 1px solid color-mix(in srgb, var(--color-accent) 30%, transparent);
 }
 
