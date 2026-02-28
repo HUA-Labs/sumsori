@@ -170,7 +170,7 @@ export const DEMO_BUNDLES: DemoBundle[] = [
                 "explanation": "강한 부정적 의미의 발화 내용이 낮은 에너지와 느린 어조로 전달되어, 내용과 음색 간의 불일치가 크다."
           },
           "coreEmotion": "체념",
-          "summary": "강한 부정적 감정을 힘없이 토해내는, 지쳐버린 마음의 체념.",
+          "summary": "지쳐버린 마음이 무겁게 흘러나오는, 힘없는 체념의 목소리.",
           "imagePrompt": {
                 "format": "SQUARE 1:1, fills entire canvas edge to edge, NO margins/borders/vignette",
                 "character": "one small, round, simple white cat (NOT human-like, NOT realistic cat)",

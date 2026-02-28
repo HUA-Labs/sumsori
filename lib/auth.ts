@@ -11,7 +11,17 @@ export const authConfig: NextAuthConfig = {
         url: 'https://kauth.kakao.com/oauth/authorize',
         params: { scope: 'profile_nickname' },
       },
-      token: 'https://kauth.kakao.com/oauth/token',
+      token: {
+        url: 'https://kauth.kakao.com/oauth/token',
+        conform: async (response: Response) => {
+          // Kakao doesn't set proper content-type header for WWW-Authenticate challenge
+          // Force the token endpoint response through without challenge check
+          return response;
+        },
+      },
+      client: {
+        token_endpoint_auth_method: 'client_secret_post',
+      },
       userinfo: 'https://kapi.kakao.com/v2/user/me',
       clientId: process.env.KAKAO_CLIENT_ID,
       clientSecret: process.env.KAKAO_CLIENT_SECRET,

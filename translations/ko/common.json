@@ -43,21 +43,41 @@
   },
   "my": {
     "title": "내 숨소리",
-    "subtitle": "{{name}}님의 마음 기록",
+    "subtitle": "{{name}}님의 숨소리 모음",
     "empty": "아직 숨소리가 없어요",
-    "firstRecording": "첫 녹음 시작하기",
+    "firstRecording": "녹음으로 전하기",
+    "firstText": "글로 전하기",
     "loginRequired": "로그인이 필요합니다",
     "login": "로그인하기"
   },
   "nav": {
     "record": "녹음",
+    "text": "텍스트",
     "myCards": "내 숨소리",
     "profile": "프로필"
   },
   "auth": {
     "loginWithKakao": "카카오로 시작하기",
-    "loginDescription": "로그인하면 나의 마음 기록을\n저장하고 모아볼 수 있어요.",
+    "loginDescription": "로그인하면 나의 숨소리를\n저장하고 모아볼 수 있어요.",
     "logout": "로그아웃"
+  },
+  "textMode": {
+    "title": "마음을 글로 전하세요",
+    "placeholder": "지금 하고 싶은 말을 적어보세요...",
+    "voiceSelect": "목소리 선택",
+    "voiceFemaleWarm": "여성 · 따뜻한",
+    "voiceFemaleFirm": "여성 · 단단한",
+    "voiceMaleUpbeat": "남성 · 밝은",
+    "voiceMaleCalm": "남성 · 차분한",
+    "analyze": "마음 읽기",
+    "surfaceEmotion": "겉으로 한 말",
+    "hiddenEmotion": "속마음",
+    "playVoice": "음성으로 듣기",
+    "writeAgain": "다시 작성하기",
+    "analyzingStep1": "글을 읽고 있어요",
+    "analyzingStep2": "숨겨진 마음을 찾는 중이에요",
+    "analyzingStep3": "그림을 그리고 있어요",
+    "analyzingStep4": "거의 다 됐어요!"
   },
   "error": {
     "micPermission": "마이크 권한을 허용해주세요.",

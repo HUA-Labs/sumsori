@@ -66,6 +66,69 @@ export interface EmotionAnalysis {
 }
 
 // ============================================================
+// Text Emotion Analysis (from /api/text-analyze)
+// ============================================================
+
+export interface SurfaceEmotion {
+  /** Emotion detected from the literal text (what the words say) */
+  emotion: string;
+  /** Topic themes */
+  themes: string[];
+  /** Notable keywords */
+  keywords: string[];
+  /** Sentiment score -1.0 to 1.0 */
+  sentiment: number;
+}
+
+export interface HiddenEmotion {
+  /** The real emotion beneath the surface */
+  emotion: string;
+  /** Reasoning for why this is the hidden emotion */
+  reasoning: string;
+}
+
+export interface TtsDirection {
+  /** Tone for TTS delivery */
+  tone: string;
+  /** Pace for TTS delivery */
+  pace: string;
+  /** Emotion for TTS delivery */
+  emotion: string;
+  /** Voice character description */
+  voiceCharacter: string;
+}
+
+/** Full text emotion analysis result */
+export interface TextEmotionAnalysis {
+  surfaceEmotion: SurfaceEmotion;
+  hiddenEmotion: HiddenEmotion;
+  concordance: Concordance;
+  coreEmotion: string;
+  summary: string;
+  ttsDirection: TtsDirection;
+  imagePrompt: ImagePrompt;
+}
+
+// ============================================================
+// API: POST /api/text-analyze
+// ============================================================
+
+export interface TextAnalyzeResponse {
+  success: boolean;
+  data?: {
+    cardId: string;
+    surfaceEmotion: SurfaceEmotion;
+    hiddenEmotion: HiddenEmotion;
+    concordance: Concordance;
+    coreEmotion: string;
+    summary: string;
+    image: { url: string };
+    audio: { url: string };
+  };
+  error?: string;
+}
+
+// ============================================================
 // API: POST /api/analyze
 // ============================================================
 

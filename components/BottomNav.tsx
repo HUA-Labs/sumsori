@@ -3,10 +3,11 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTranslation } from '@hua-labs/hua/i18n';
-import { Microphone, Images } from '@phosphor-icons/react';
+import { Microphone, TextAa, Images } from '@phosphor-icons/react';
 
 const tabs = [
   { href: '/', labelKey: 'common:nav.record', icon: Microphone },
+  { href: '/text', labelKey: 'common:nav.text', icon: TextAa },
   { href: '/my', labelKey: 'common:nav.myCards', icon: Images },
 ] as const;
 

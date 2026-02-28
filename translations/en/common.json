@@ -43,14 +43,16 @@
   },
   "my": {
     "title": "My Sumsori",
-    "subtitle": "{{name}}'s heart journal",
+    "subtitle": "{{name}}'s collection",
     "empty": "No recordings yet",
-    "firstRecording": "Start your first recording",
+    "firstRecording": "Record your voice",
+    "firstText": "Write it out",
     "loginRequired": "Login required",
     "login": "Login"
   },
   "nav": {
     "record": "Record",
+    "text": "Text",
     "myCards": "My Cards",
     "profile": "Profile"
   },
@@ -58,6 +60,24 @@
     "loginWithKakao": "Continue with Kakao",
     "loginDescription": "Sign in to save and look back on\nyour heart's moments.",
     "logout": "Log out"
+  },
+  "textMode": {
+    "title": "Express your heart in words",
+    "placeholder": "Write what you want to say...",
+    "voiceSelect": "Choose a voice",
+    "voiceFemaleWarm": "Female · Warm",
+    "voiceFemaleFirm": "Female · Firm",
+    "voiceMaleUpbeat": "Male · Upbeat",
+    "voiceMaleCalm": "Male · Calm",
+    "analyze": "Read My Heart",
+    "surfaceEmotion": "What you said out loud",
+    "hiddenEmotion": "What's really inside",
+    "playVoice": "Listen as voice",
+    "writeAgain": "Write Again",
+    "analyzingStep1": "Reading your words",
+    "analyzingStep2": "Finding the hidden feelings",
+    "analyzingStep3": "Painting your picture",
+    "analyzingStep4": "Almost there!"
   },
   "error": {
     "micPermission": "Please allow microphone access.",
