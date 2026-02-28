@@ -35,13 +35,14 @@
 
 ## Workflow
 
+**Git:** Solo repo, main 직푸시. 브랜치 안 떼도 됨.
+
 ```
 1. Build       → pnpm build
 2. Dev         → pnpm dev
-3. Commit      → /commit
-4. PR          → /pr
-5. Deploy      → /deploy (git push to main)
-6. Devlog      → /devlog → docs/devlogs/
+3. Commit      → /commit → git push origin main
+4. Deploy      → Vercel auto-deploy on main push
+5. Devlog      → /devlog → docs/devlogs/
 ```
 
 ## Skills

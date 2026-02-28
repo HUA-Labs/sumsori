@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getGenAI, ANALYSIS_MODEL, IMAGE_MODEL } from '@/lib/gemini';
 import { supabase } from '@/lib/supabase';
 import { ANALYSIS_PROMPT } from '@/lib/prompts/analysis';
+import { ANALYSIS_PROMPT_EN } from '@/lib/prompts/analysis-en';
 import type { EmotionAnalysis, AnalyzeResponse } from '@/lib/types';
 import { getRandomDemo } from '@/lib/demo/samples';
 import { auth } from '@/lib/auth';
@@ -14,6 +15,7 @@ export async function POST(req: NextRequest) {
     const formData = await req.formData();
     const audioFile = formData.get('audio') as File | null;
     const isDemo = formData.get('demo') === 'true';
+    const locale = formData.get('locale')?.toString() || 'ko';
 
     // Demo mode — return cached result
     if (isDemo || !audioFile) {
@@ -36,8 +38,17 @@ export async function POST(req: NextRequest) {
     const audioBuffer = await audioFile.arrayBuffer();
     const audioBase64 = Buffer.from(audioBuffer).toString('base64');
 
-    // Determine MIME type from file
-    const mimeType = audioFile.type || 'audio/webm';
+    // Determine MIME type from file (fallback by extension for mobile uploads)
+    let mimeType = audioFile.type;
+    if (!mimeType || mimeType === 'application/octet-stream') {
+      const ext = audioFile.name?.split('.').pop()?.toLowerCase();
+      const mimeMap: Record<string, string> = {
+        webm: 'audio/webm', m4a: 'audio/mp4', mp4: 'audio/mp4',
+        mp3: 'audio/mpeg', wav: 'audio/wav', ogg: 'audio/ogg', aac: 'audio/aac',
+        caf: 'audio/x-caf',
+      };
+      mimeType = (ext && mimeMap[ext]) || 'audio/webm';
+    }
 
     // 3. Gemini analysis — single call for everything
     const analysisResponse = await getGenAI().models.generateContent({
@@ -46,7 +57,7 @@ export async function POST(req: NextRequest) {
         {
           role: 'user',
           parts: [
-            { text: ANALYSIS_PROMPT },
+            { text: locale === 'en' ? ANALYSIS_PROMPT_EN : ANALYSIS_PROMPT },
             {
               inlineData: {
                 mimeType,

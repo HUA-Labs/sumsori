@@ -1,0 +1,43 @@
+{
+  "voiceTone": {
+    "emotion": "차분함",
+    "energy": 40,
+    "pace": "normal",
+    "stability": 70,
+    "details": "차분하고 담담한 음성이지만, 미세한 떨림과 깊은 숨소리가 섞여 있어 어딘가 불안정한 느낌을 준다. 말끝을 올리며 자신을 납득시키려는 듯한 뉘앙스가 있다."
+  },
+  "textContent": {
+    "emotion": "긍정",
+    "themes": [
+      "안심",
+      "자신감 표현",
+      "현재 상태 긍정"
+    ],
+    "keywords": [
+      "괜찮아",
+      "잘 먹고",
+      "잘 지내",
+      "진짜",
+      "정말"
+    ],
+    "sentiment": 0.8,
+    "transcript": "괜찮아. 요새 밥도 잘 먹고 있고 아주 잘 지내. 진짜 잘 지낸다니까? 정말이야."
+  },
+  "concordance": {
+    "match": "low",
+    "explanation": "내용은 긍정적이고 자신감 있는 상태를 강하게 어필하지만, 목소리 톤은 이를 온전히 뒷받침하지 못하고 미묘한 불안감과 담담함을 내포하고 있어 불일치한다."
+  },
+  "coreEmotion": "서글픔",
+  "summary": "애써 괜찮다고 말하는 목소리 너머로, 홀로 감내하는 쓸쓸하고 조용한 슬픔이 짙게 배어 나온다.",
+  "imagePrompt": {
+    "format": "SQUARE 1:1, fills entire canvas edge to edge, NO margins/borders/vignette",
+    "character": "one small, round, simple white cat (NOT human-like, NOT realistic cat)",
+    "angle": "THREE-QUARTER BACK VIEW only (hint of one eye OK, never fully front-facing)",
+    "style": "oil pastel and crayon on thick textured paper. Visible rough strokes and paper grain. NO black outlines — shapes defined by color contrast only. Edges soft and rough like real crayon. Simple, minimal, children's picture book. NOT photorealistic, NOT 3D, NOT anime, NOT smooth digital",
+    "scene": "rainy alley with puddles",
+    "catPose": "sitting still looking away",
+    "colorPalette": "cool blues/lavender",
+    "lighting": "single streetlamp glow",
+    "forbidden": "NO text, NO words, NO letters, NO human faces, NO other animals"
+  }
+}

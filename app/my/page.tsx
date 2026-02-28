@@ -3,6 +3,7 @@
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useTranslation } from '@hua-labs/hua/i18n';
 import LoginSheet from '@/components/LoginSheet';
 
 interface CardItem {
@@ -13,6 +14,7 @@ interface CardItem {
 }
 
 export default function MyPage() {
+  const { t, currentLanguage } = useTranslation();
   const { data: session, status } = useSession();
   const [cards, setCards] = useState<CardItem[]>([]);
   const [loading, setLoading] = useState(true);
@@ -27,7 +29,6 @@ export default function MyPage() {
       .finally(() => setLoading(false));
   }, [status]);
 
-  // 비로그인 시 자동으로 LoginSheet 열기
   useEffect(() => {
     if (status === 'unauthenticated') {
       setLoginOpen(true);
@@ -45,12 +46,12 @@ export default function MyPage() {
   if (status === 'unauthenticated') {
     return (
       <main className="flex flex-col items-center justify-center px-4 py-20 gap-4">
-        <p className="text-[var(--color-muted-foreground)]">로그인이 필요합니다</p>
+        <p className="text-[var(--color-muted-foreground)]">{t('common:my.loginRequired')}</p>
         <button
           onClick={() => setLoginOpen(true)}
           className="py-3 px-6 rounded-2xl bg-[var(--color-accent)] text-white text-sm font-medium transition-transform active:scale-95"
         >
-          로그인하기
+          {t('common:my.login')}
         </button>
         <LoginSheet isOpen={loginOpen} onClose={() => setLoginOpen(false)} />
       </main>
@@ -62,9 +63,9 @@ export default function MyPage() {
       <div className="max-w-lg mx-auto space-y-6">
         {/* Page title */}
         <div>
-          <h1 className="text-2xl font-bold">내 숨소리</h1>
+          <h1 className="text-2xl font-bold">{t('common:my.title')}</h1>
           <p className="text-sm text-[var(--color-muted-foreground)]">
-            {session?.user?.name}님의 감정 기록
+            {t('common:my.subtitle', { name: session?.user?.name ?? '' })}
           </p>
         </div>
 
@@ -77,15 +78,14 @@ export default function MyPage() {
           </div>
         ) : cards.length === 0 ? (
           <div className="text-center py-16 space-y-3">
-            <p className="text-4xl">🎙️</p>
             <p className="text-[var(--color-muted-foreground)]">
-              아직 숨소리가 없어요
+              {t('common:my.empty')}
             </p>
             <Link
               href="/"
               className="inline-block py-3 px-6 rounded-2xl bg-[var(--color-accent)] text-white text-sm font-medium"
             >
-              첫 녹음 시작하기
+              {t('common:my.firstRecording')}
             </Link>
           </div>
         ) : (
@@ -106,7 +106,7 @@ export default function MyPage() {
                     #{card.core_emotion}
                   </span>
                   <p className="text-white/60 text-[10px]">
-                    {new Date(card.created_at).toLocaleDateString('ko-KR', {
+                    {new Date(card.created_at).toLocaleDateString(currentLanguage === 'en' ? 'en-US' : 'ko-KR', {
                       month: 'short',
                       day: 'numeric',
                     })}

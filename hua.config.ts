@@ -4,7 +4,7 @@ export default defineConfig({
   preset: 'product',
   i18n: {
     defaultLanguage: 'ko',
-    supportedLanguages: ['ko'],
+    supportedLanguages: ['ko', 'en'],
     namespaces: ['common'],
     translationLoader: 'api',
     translationApiPath: '/api/translations',
